@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
+_build = '135'
 print '\033[2J\033[H[001] [0.00000000] boot: starting, getting time'
 import time
 starttime = time.time()
 print '[002] [{:.08f}] boot: loading version'.format(time.time() - starttime)
 _counter = 3
 _version = '1.5.0.0'
-_build = '134'
 _date = '07.18.19'
 print '[{:03d}] [{:.8f}] pyos {}.{} ({})'.format(_counter, time.time() - starttime, _version, _build, _date)
 _counter += 1
