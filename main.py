@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-_build = '141'
+_build = '143'
 print('\033[2J\033[H[001] [0.00000000] boot: starting, getting time')
 import time
 starttime = time.time()
 print('[002] [{:.08f}] boot: loading version'.format(time.time() - starttime))
 _counter = 3
-_version = '1.6.3.0'
+_version = '1.6.3.1'
 _date = '07.19.19'
 print('[{:03d}] [{:.8f}] pyos {}.{} ({})'.format(_counter, time.time() - starttime, _version, _build, _date))
 _counter += 1
@@ -157,7 +157,7 @@ if entered == 'start':
                     elif x == 'cl':
                         sys.stdout.write('\x1b[2J\x1b[H')
                     elif x == 'rb':
-                        raise SystemExit
+                        raise OSError
                     else:
                         sys.exit()
                 else:
