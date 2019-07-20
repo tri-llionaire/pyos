@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '026'
+_build = '027'
 _date = '07.19.2019'
 import urllib.request, urllib.parse, urllib.error, urllib.request, time, os
 print('pyos manager: checking for updates')
@@ -49,5 +49,5 @@ input('Enter to boot pyos')
 while True:
     try:
         exec(open("main.py").read())
-    except SystemExit as err:
+    except OSError as err:
         exec(open("main.py").read())
