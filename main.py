@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-_build = '169'
+_build = '170'
 _hash = '41BA268600D537A977074A3B706988CFFE3C32365325892A8FCB02BF5F39E29C'
-_version = '3.1.0.3'
+_version = '3.1.0.4'
 _date = '07.26.19'
 gr = input('(g)raphic/(t)erminal startup: ')
 if gr == 't':
@@ -129,7 +129,7 @@ if entered == 'start':
                     elif x == 'cl':
                         sys.stdout.write('\x1b[2J\x1b[H')
                     elif x == 'rb':
-                        raise OSError
+                        exec(open('main.py').read())
                     else:
                         sys.exit()
                 else:
