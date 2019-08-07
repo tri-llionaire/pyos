@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-_build = '034'
+_build = '036'
 _hash = 'E13F8AAF31B9EBAE7C7AF4FD9E2682D0A4EEFBD6A99D285CF825D2EEFB063801'
-_date = '07.26.2019'
-import urllib.request, urllib.parse, urllib.error, urllib.request, time, os
+_date = '08.07.2019'
+import urllib.request, urllib.parse, urllib.error, urllib.request
 print('pyos manager: checking for internet')
 try:
     urllib.request.urlopen('http://216.58.192.142', timeout=1)
     check = 1
-except urllib.error.URLError as err:
+except urllib.error.URLError:
     check = 0
 if check == 1:
     print('checking for updates')
