@@ -1,28 +1,22 @@
 # -*- coding: utf-8 -*-
-_build = '170'
+_build = '181'
 _hash = '41BA268600D537A977074A3B706988CFFE3C32365325892A8FCB02BF5F39E29C'
-_version = '3.1.0.4'
-_date = '07.26.19'
+_version = '3.1.0.5'
+_date = '08.07.19'
+_counter = 1
 gr = input('(g)raphic/(t)erminal startup: ')
 if gr == 't':
-    print('\033[2J\033[H[001] [0.00000000] boot: starting, getting time')
+    print('\033[2J\033[H[{:03d}] [0.00000000] boot: starting, getting time'.format(_counter))
+    _counter += 1
     import time
     starttime = time.time()
-    print('[002] [{:.08f}] boot: loading version'.format(time.time() - starttime))
-    print('[{:03d}] [{:.8f}] pyos {}.{} ({})'.format(_counter, time.time() - starttime, _version, _build, _date))
+    print('[{:03d}] [{:.08f}] boot: loading version'.format(_counter, time.time() - starttime))
     _counter += 1
-    print('[{:03d}] [{:.8f}] boot: Loading random'.format(_counter, time.time() - starttime))
+    print('[{:03d}] [{:.8f}] pyos {}'.format(_counter, time.time() - starttime, _version))
     _counter += 1
-    import random
     print('[{:03d}] [{:.8f}] boot: Loading sys'.format(_counter, time.time() - starttime))
     _counter += 1
     import sys
-    print('[{:03d}] [{:.8f}] boot: Loading hashlib'.format(_counter, time.time() - starttime))
-    _counter += 1
-    import hashlib
-    print('[{:03d}] [{:.8f}] boot: Loading urllib'.format(_counter, time.time() - starttime))
-    _counter += 1
-    import urllib.request, urllib.error, urllib.parse
     print('[{:03d}] [{:.8f}] boot: Loading variables'.format(_counter, time.time() - starttime))
     _counter += 1
     import variables
@@ -33,7 +27,7 @@ if gr == 't':
     _counter += 1
     print('[{:03d}] [{:.8f}] boot: Checking internet connection'.format(_counter, time.time() - starttime))
     _counter += 1
-    if variables.check() == True:
+    if variables.check() is True:
         _internet = True
         print('[{:03d}] [{:.8f}] boot: Internet connection succeeded'.format(_counter, time.time() - starttime))
         _counter += 1
@@ -60,10 +54,10 @@ if gr == 't':
     print('[{:03d}] [{:.08f}] {}: Loading login'.format(_counter, time.time() - starttime, _path))
     _counter += 1
     _user = input('usr: ')
-    _pswd = input('pwd:' )
+    _pswd = input('pwd: ')
     print('[{:03d}] [{:.08f}] {}: Loading pysh (1.0.6)'.format(_counter, time.time() - starttime, _path))
 else:
-    import time, random, sys, hashlib, urllib.request, urllib.error, urllib.parse, variables, platform
+    import time, sys, variables, platform
     sys.stdout.write('\033[2J\033[HPPPP Y  Y OOOO SSSS 3333\nP  P  YY  O  O SS   3333\nPPPP   Y  O  O   SS    3\nP      Y  OOOO SSSS 3333\n\n\n        login\n')
     _user = input('        usr: ')
     _pswd = input('        pwd: ')
@@ -75,7 +69,7 @@ else:
     _path = 'temp/'
     paths = ['temp/']
 print('\n\n\n')
-cmdlist = ['start','exit', 'rb', 'cd','md','ls','pd','cf','cl', 'help', 'cotw', 'scan', 'hash', 'cat', 'edit', 'del']
+cmdlist = ['start', 'exit', 'rb', 'cd', 'md', 'ls', 'pd', 'cf', 'cl', 'help', 'cotw', 'scan', 'hash', 'cat', 'edit', 'del']
 filedict = {}
 waiting = 0
 added = []
@@ -119,11 +113,11 @@ if entered == 'start':
                     elif x == 'start':
                         print('already in pysh')
                     elif x == 'cotw':
-                        variables.cotw(c_countries, c_answers, c_versioning, c_build, c_date, c_right, c_wrong, c_total, c_ans)
+                        variables.cotw(variables.c_countries, variables.c_answers, c_versioning, c_build, c_date, c_right, c_wrong, c_total, c_ans)
                     elif x == 'scan':
                         variables.scan(s_w, s_x, s_n)
                     elif x == 'hash':
-                        variables.thsh(h_char, h_n)
+                        variables.thsh(variables.h_char, h_n)
                     elif x == 'help':
                         print('exit: exit pyos\nrb: reboot pyos\ncd $: change directory to $\nmd $: create directory $\nls: list contents of current directory\npd: print working directory (useless)\ncf $: create file $\ncat $: print contents of $\ndel $: delete file $\nedit $: edit file $\ncl: clear screen\nhelp: show this\ncotw: start countriesoftheworld\nscan: start utf8scan6\nhash: start hash converter')
                     elif x == 'cl':
@@ -137,7 +131,7 @@ if entered == 'start':
             else:
                 if waiting == 1:
                     if x == '..':
-                        _path = _path[:-1].rsplit('/',1)[0] + '/'
+                        _path = _path[:-1].rsplit('/', 1)[0] + '/'
                     else:
                         if _path + x + '/' in paths:
                             _path = _path + x + '/'
@@ -165,7 +159,7 @@ if entered == 'start':
                 elif waiting == 4:
                     try:
                         print(filedict[x])
-                    except KeyError as err:
+                    except KeyError:
                         print('pyos: pysh: file {} doesn\'t exist'.format(x))
                     waiting = 0
                 elif waiting == 5:
