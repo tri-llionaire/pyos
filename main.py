@@ -1,64 +1,44 @@
 # -*- coding: utf-8 -*-
-_build = '181'
+_build = '199'
 _hash = '41BA268600D537A977074A3B706988CFFE3C32365325892A8FCB02BF5F39E29C'
-_version = '3.1.0.5'
-_date = '08.07.19'
+_version = '3.1.3.2'
+_date = '08.11.19'
 _counter = 1
 gr = input('(g)raphic/(t)erminal startup: ')
+import subprocess, data
+tmp = subprocess.call(data.term, shell=True)
 if gr == 't':
-    print('\033[2J\033[H[{:03d}] [0.00000000] boot: starting, getting time'.format(_counter))
+    print('[{:03d}] [0.00000000] boot: starting, getting time'.format(_counter))
     _counter += 1
     import time
     starttime = time.time()
-    print('[{:03d}] [{:.08f}] boot: loading version'.format(_counter, time.time() - starttime))
-    _counter += 1
-    print('[{:03d}] [{:.8f}] pyos {}'.format(_counter, time.time() - starttime, _version))
-    _counter += 1
-    print('[{:03d}] [{:.8f}] boot: Loading sys'.format(_counter, time.time() - starttime))
+    print('[{:03d}] [{:.8f}] boot: loading sys'.format(_counter, time.time() - starttime))
     _counter += 1
     import sys
-    print('[{:03d}] [{:.8f}] boot: Loading variables'.format(_counter, time.time() - starttime))
+    print('[{:03d}] [{:.8f}] boot: loading variables'.format(_counter, time.time() - starttime))
     _counter += 1
     import variables
-    print('[{:03d}] [{:.8f}] boot: Loading platform'.format(_counter, time.time() - starttime))
+    print('[{:03d}] [{:.8f}] boot: loading platform'.format(_counter, time.time() - starttime))
     _counter += 1
     import platform
-    print('[{:03d}] [{:.8f}] boot: {}{} {} {}'.format(_counter, time.time() - starttime, platform.machine(), platform.processor(), platform.system(), variables.iflinux()))
+    print('[{:03d}] [{:.8f}] boot: on {}'.format(_counter, time.time() - starttime, platform.uname()))
     _counter += 1
-    print('[{:03d}] [{:.8f}] boot: Checking internet connection'.format(_counter, time.time() - starttime))
+    print('[{:03d}] [{:.8f}] boot: checking internet connection'.format(_counter, time.time() - starttime))
     _counter += 1
     if variables.check() is True:
         _internet = True
-        print('[{:03d}] [{:.8f}] boot: Internet connection succeeded'.format(_counter, time.time() - starttime))
+        print('[{:03d}] [{:.8f}] boot: internet connection succeeded'.format(_counter, time.time() - starttime))
         _counter += 1
     else:
         _internet = False
-        print('[{:03d}] [{:.8f}] boot: Internet connection failed'.format(_counter, time.time() - starttime))
+        print('[{:03d}] [{:.8f}] boot: internet connection failed'.format(_counter, time.time() - starttime))
         _counter += 1
-    print('[{:03d}] [{:.8f}] boot: Loading builtins'.format(_counter, time.time() - starttime))
-    _counter += 1
-    h_n = ''
-    s_w = 0
-    s_x = 0
-    s_n = 0
-    c_versioning = '1.6.5'
-    c_build = '37'
-    c_date = '051519'
-    c_right = 0
-    c_wrong = 0
-    c_total = c_right + c_wrong
-    c_ans = 'x'
-    print('[{:03d}] [{:.8f}] boot: Setting up pysh info'.format(_counter, time.time() - starttime))
-    _counter += 1
-    _path = 'main'
-    print('[{:03d}] [{:.08f}] {}: Loading login'.format(_counter, time.time() - starttime, _path))
-    _counter += 1
+    print('[{:03d}] [{:.8f}] boot: loading login'.format(_counter, time.time() - starttime))
     _user = input('usr: ')
     _pswd = input('pwd: ')
-    print('[{:03d}] [{:.08f}] {}: Loading pysh (1.0.6)'.format(_counter, time.time() - starttime, _path))
 else:
     import time, sys, variables, platform
-    sys.stdout.write('\033[2J\033[HPPPP Y  Y OOOO SSSS 3333\nP  P  YY  O  O SS   3333\nPPPP   Y  O  O   SS    3\nP      Y  OOOO SSSS 3333\n\n\n        login\n')
+    sys.stdout.write('PPPP Y  Y OOOO SSSS 3333\nP  P  YY  O  O SS   3333\nPPPP   Y  O  O   SS    3\nP      Y  OOOO SSSS 3333\n\n\n        login\n')
     _user = input('        usr: ')
     _pswd = input('        pwd: ')
 if _user == 'root' and _pswd == 'root':
@@ -73,6 +53,9 @@ cmdlist = ['start', 'exit', 'rb', 'cd', 'md', 'ls', 'pd', 'cf', 'cl', 'help', 'c
 filedict = {}
 waiting = 0
 added = []
+tmp = subprocess.call(data.term, shell=True)
+print('pyos 3.1.3.1 194.021.041 08.11.19 Price et al Mingle, Swan')
+sys.stdout.write('(pysh 1.0.6) ')
 entered = 'start'
 if entered == 'start':
     while entered != 'exit':
@@ -113,15 +96,15 @@ if entered == 'start':
                     elif x == 'start':
                         print('already in pysh')
                     elif x == 'cotw':
-                        variables.cotw(variables.c_countries, variables.c_answers, c_versioning, c_build, c_date, c_right, c_wrong, c_total, c_ans)
+                        variables.cotw(variables.c_countries, variables.c_answers)
                     elif x == 'scan':
-                        variables.scan(s_w, s_x, s_n)
+                        variables.scan()
                     elif x == 'hash':
-                        variables.thsh(variables.h_char, h_n)
+                        variables.thsh(variables.h_char)
                     elif x == 'help':
                         print('exit: exit pyos\nrb: reboot pyos\ncd $: change directory to $\nmd $: create directory $\nls: list contents of current directory\npd: print working directory (useless)\ncf $: create file $\ncat $: print contents of $\ndel $: delete file $\nedit $: edit file $\ncl: clear screen\nhelp: show this\ncotw: start countriesoftheworld\nscan: start utf8scan6\nhash: start hash converter')
                     elif x == 'cl':
-                        sys.stdout.write('\x1b[2J\x1b[H')
+                        tmp = subprocess.call(data.term, shell=True)
                     elif x == 'rb':
                         exec(open('main.py').read())
                     else:
