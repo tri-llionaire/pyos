@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
-_build = '013'
+_build = '032'
 _hash = '22911E5A448E5E0C5EBE31FB01FA0180CD76D8860BB487023040DB7269FA9E56'
-_date = '08.07.2019'
-import platform, urllib.request, urllib.error, urllib.parse, hashlib, random, sys, main
-def iflinux():
-    if platform.system() == 'Linux':
-        return platform.dist()[0].capitalize() + platform.dist()[1]
-    else:
-        return ''
+_date = '08.11.2019'
+import urllib.request, urllib.error, hashlib, random, sys, data
 def check():
     try:
         urllib.request.urlopen('http://216.58.192.142', timeout=1)
@@ -15,8 +10,9 @@ def check():
     except urllib.error.URLError:
         return False
 h_char = {' ': '169', '$': '157', '(': '144', ',': '156', '0': '140', '4': '160', '8': '180', '<': '149', '@': '142', 'D': '110', 'H': '138', 'L': '106', 'P': '167', 'T': '126', 'X': '195', '\\': '124', '`': '151', 'd': '159', 'h': '114', 'l': '119', 'p': '139', 't': '174', 'x': '103', '|': '138', '#': '192', "'": '186', '+': '163', '/': '176', '3': '191', '7': '100', ';': '191', '?': '115', 'C': '121', 'G': '154', 'K': '161', 'O': '172', 'S': '197', 'W': '162', '[': '182', '_': '114', 'c': '159', 'g': '101', 'k': '159', 'o': '134', 's': '121', 'w': '123', '{': '185', '"': '193', '&': '118', '*': '172', '.': '106', '2': '135', '6': '119', ': ': '123', '>': '190', 'B': '114', 'F': '180', 'J': '119', 'N': '121', 'R': '119', 'V': '188', 'Z': '102', '^': '133', 'b': '105', 'f': '190', 'j': '113', 'n': '139', 'r': '162', 'v': '152', 'z': '181', '~': '185', '!': '118', '%': '121', ')': '137', '-': '99', '1': '158', '5': '147', '9': '161', '=': '109', 'A': '106', 'E': '179', 'I': '151', 'M': '195', 'Q': '111', 'U': '100', 'Y': '101', ']': '185', 'a': '174', 'e': '172', 'i': '154', 'm': '198', 'q': '145', 'u': '130', 'y': '170', '}': '148'}
-def thsh(t_char, t_n):
-    t_which = input('t-hash, md5, sha1, sha224, sha256, sha384, or sha512? ')
+def thsh(t_char):
+    t_n = ''
+    t_which = input('t-hash, md5, sha1, sha256, sha384, or sha512? ')
     if t_which == 't-hash':
         t_key = int(input('enter a key (2-100): '))
         if 2 <= t_key <= 100:
@@ -36,20 +32,19 @@ def thsh(t_char, t_n):
     else:
         t_s = input('enter string: ')
         if t_which == 'md5':
-            print(hashlib.md5(t_s).hexdigest())
+            print(hashlib.md5(t_s.encode()).hexdigest())
         elif t_which == 'sha1':
-            print(hashlib.sha1(t_s).hexdigest())
-        elif t_which == 'sha224':
-            print(hashlib.sha224(t_s).hexdigest())
+            print(hashlib.sha1(t_s.encode()).hexdigest())
         elif t_which == 'sha256':
-            print(hashlib.sha256(t_s).hexdigest())
+            print(hashlib.sha256(t_s.encode()).hexdigest())
         elif t_which == 'sha384':
-            print(hashlib.sha384(t_s).hexdigest())
+            print(hashlib.sha384(t_s.encode()).hexdigest())
         elif t_which == 'sha512':
-            print(hashlib.sha512(t_s).hexdigest())
+            print(hashlib.sha512(t_s.encod()).hexdigest())
         else:
             print('pyos: pysh: hash: invalid hash')
-def itsh(i_s, i_key, i_char, i_n):
+def itsh(i_s, i_key, i_char):
+    i_n = ''
     if 2 <= i_key <= 100:
         if len(i_s) > 32:
             i_s = i_s[:33]
@@ -60,30 +55,27 @@ def itsh(i_s, i_key, i_char, i_n):
                 i_n = i_char[i_a] + i_n
             else:
                 i_n = i_char[' '] + i_n
-        return hex(int(i_n)/i_key)[2:-1]
+        return hex(int(int(i_n)/i_key))[2:-1]
     else:
         print('pyos: pysh: scan: t-hash: invalid key')
 def otherhash(s_hs, s_st):
     if s_hs == 'md5':
-        s_st = hashlib.md5(s_st).hexdigest()
+        s_st = hashlib.md5(s_st.encode()).hexdigest()
     elif s_hs == 'sha1':
-        s_st = hashlib.sha1(s_st).hexdigest()
-    elif s_hs == 'sha244':
-        s_st = hashlib.sha244(s_st).hexdigest()
+        s_st = hashlib.sha1(s_st.encode()).hexdigest()
     elif s_hs == 'sha256':
-        s_st = hashlib.sha256(s_st).hexdigest()
+        s_st = hashlib.sha256(s_st.encode()).hexdigest()
     elif s_hs == 'sha384':
-        s_st = hashlib.sha384(s_st).hexdigest()
+        s_st = hashlib.sha384(s_st.encode()).hexdigest()
     elif s_hs == 'sha512':
-        s_st = hashlib.sha512(s_st).hexdigest()
+        s_st = hashlib.sha512(s_st.encode()).hexdigest()
     else:
         pass
-def scan(s_w, s_x, s_n):
+def scan():
+    s_x = 0
     s_ch = input('python utf8scan6.3.3\nchoose an option to convert:\n1: Non-condensed, non-hashed\n2: Condensed, non-hashed\n3: Non-condensed, hashed\n4: Condensed, hashed\n5: Super condensed, hashed\n')
     if s_ch == '3' or s_ch == '4' or s_ch == '5':
-        s_hs = input('t-hash, md5, sha1, sha224, sha256, sha384, or sha512?: ')
-    else:
-        pass
+        s_hs = input('t-hash, md5, sha1, sha256, sha384, or sha512?: ')
     s_st = input('enter your string: ')
     s_r = len(s_st) + 3
     s_z = len(s_st) + 5
@@ -100,7 +92,7 @@ def scan(s_w, s_x, s_n):
         else:
             sys.stdout.write('|\n\\{}'.format(s_hs)+((s_z-6)*'-')+'/\n')
     if s_ch == '1':
-        sys.stdout.write('/U8S1'+((s_z-4)*'-')+'\\\n|')
+        sys.stdout.write('/U8S1'+((s_z-6)*'-')+'\\\n|')
         for s_i in s_bi:
             if s_x == s_r:
                 sys.stdout.write('|\n|')
@@ -115,7 +107,7 @@ def scan(s_w, s_x, s_n):
             sys.stdout.flush()
         s_output_end(s_x, s_r)
     elif s_ch == '2':
-        sys.stdout.write('/U8S2'+((s_z-4)*'-')+'\\\n|')
+        sys.stdout.write('/U8S2'+((s_z-6)*'-')+'\\\n|')
         for s_i in [s_bi[s_i:s_i+2] for s_i in range(0, len(s_bi), 2)]:
             if s_x == s_r:
                 sys.stdout.write('|\n|')
@@ -135,7 +127,7 @@ def scan(s_w, s_x, s_n):
     elif s_ch == '3':
         if s_hs == 't-hash':
             s_key = input('enter key (2-100): ')
-            s_st = str(itsh(s_st, int(s_key), h_char, main.h_n))
+            s_st = str(itsh(s_st, int(s_key), h_char))
         else:
             otherhash(s_hs, s_st)
         s_r = len(s_st)
@@ -156,7 +148,7 @@ def scan(s_w, s_x, s_n):
     elif s_ch == '4':
         if s_hs == 't-hash':
             s_key = input('enter key (2-100): ')
-            s_st = str(itsh(s_st, int(s_key), h_char, main.h_n))
+            s_st = str(itsh(s_st, int(s_key), h_char))
         else:
             otherhash(s_hs, s_st)
         s_r = len(s_st)
@@ -181,7 +173,7 @@ def scan(s_w, s_x, s_n):
     elif s_ch == '5':
         if s_hs == 't-hash':
             s_key = input('enter key (2-100): ')
-            s_st = str(itsh(s_st, int(s_key), h_char, main.h_n))
+            s_st = str(itsh(s_st, int(s_key), h_char))
         else:
             otherhash(s_hs, s_st)
         s_r = len(s_st)
@@ -611,64 +603,63 @@ c_answers = {
     'Zambia': 'Lusaka',
     'Zimbabwe': 'Harare',
 }
-def cotw(c_countries, c_answers, c_versioning, c_build, c_date, c_right, c_wrong, c_total, c_ans):
-    print('Welcome to countriesoftheworld. Here you can learn the countries and capitals of the world! Type \'end\' to end the program. Type \'all\' to see the technical data for this program. Let\'s get started.\n')
+def cotw(c_countries, c_answers):
+    c_right = 0
+    c_wrong = 0
+    c_total = c_right + c_wrong
+    c_ans = 'x'
+    print('countriesoftheworld 1.6.6.39\n\'end\' to end the program\n')
     def c_get_key(c_val):
         for c_key, c_value in list(c_answers.items()):
             if c_val == c_value:
                 return c_key
     def c_c_w_r(c_right, c_wrong):
-        return '\n\033[92m%s/%s\033[0m' % (c_right, c_wrong)
+        return '\n{}{}/{}{}'.format(data.green, c_right, c_wrong, data.white)
     def c_c_w_w(c_right, c_wrong):
-        return '\n\033[91m%s/%s\033[0m' % (c_right, c_wrong)
+        return '\n{}{}/{}{}'.format(data.red, c_right, c_wrong, data.white)
     def c_perc(c_right, c_wrong):
-        return '%.2f' % (100.00 / float(c_total) * float(c_right))
+        return '{0:.2f}'.format(100.00 / float(c_total) * float(c_right))
     c_choose = input('Answer with the countries or capitals? (1 or 2): ')
-    if c_choose == 'all':
-        print('\nVersion %s.%s.%s' % (c_versioning, c_build, c_date))
-        print('Tristan Price and Gabriel Swan.')
-        print('Copyright 2019 Apache 2.0 license.')
-        print('Python 3.7.4')
-    elif c_choose == '2':
+    if c_choose == '2':
         while c_ans.lower() != 'end':
             c_n = random.randint(0, 196)
             print('\n\n')
-            print('What is the capital of the country \033[95m%s?\n\033[0m\n' % (c_get_key(c_answers.get(c_countries[c_n]))))
+            print('What is the capital of the country {}{}{}?\n\n'.format(data.other, c_get_key(c_answers.get(c_countries[c_n])), data.white))
             c_ans = input()
             if c_ans.lower() == 'end':
                 pass
             elif c_ans.lower() == c_answers.get(c_countries[c_n]).lower():
-                print('\n\033[92mCORRECT')
+                print('\n{}CORRECT'.format(data.green))
                 c_right += 1
                 c_total = c_right + c_wrong
                 print(c_c_w_r(c_right, c_total))
-                print('\033[95m%s' % (str(c_perc(c_right, c_wrong))) + '%\033[0m\n')
+                print('{}{}'.format(data.other, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(data.white))
             else:
-                print('\n\033[91mWRONG. ' + c_answers.get(c_countries[c_n]))
+                print('\n{}WRONG. '.format(data.red) + c_answers.get(c_countries[c_n]))
                 c_wrong += 1
                 c_total = c_right + c_wrong
                 print(c_c_w_w(c_right, c_total))
-                print('\033[95m%s' % (str(c_perc(c_right, c_wrong))) + '%\033[0m\n')
+                print('{}{}'.format(data.other, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(data.white))
     elif c_choose == '1':
         while c_ans.lower() != 'end':
             c_n = random.randint(0, 196)
             print('\n\n')
-            print('Which country has the capital \033[95m%s?\n\033[0m\n' % (c_answers.get(c_countries[c_n])))
+            print('Which country has the capital {}{}{}?\n\n'.format(data.other, c_answers.get(c_countries[c_n]), data.white))
             c_ans = input()
             if c_ans.lower() == 'end':
                 pass
             elif c_ans.lower() == c_get_key(c_answers.get(c_countries[c_n])).lower():
-                print('\n\033[92mCORRECT')
+                print('\n{}CORRECT'.format(data.green))
                 c_right += 1
                 c_total = c_right + c_wrong
                 print(c_c_w_r(c_right, c_total))
-                print('\033[95m%s' % (str(c_perc(c_right, c_wrong))) + '%\033[0m\n')
+                print('{}{}'.format(data.other, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(data.white))
             else:
-                print('\n\033[91mWRONG. ' + c_get_key(c_answers.get(c_countries[c_n])))
+                print('\n{}WRONG. '.format(data.red) + c_get_key(c_answers.get(c_countries[c_n])))
                 c_wrong += 1
                 c_total = c_right + c_wrong
                 print(c_c_w_w(c_right, c_total))
-                print('\033[95m%s' % (str(c_perc(c_right, c_wrong))) + '%\033[0m\n')
+                print('{}{}'.format(data.other, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(data.white))
     else:
         print('Um')
         pass
