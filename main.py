@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 _build = '199'
 _hash = '41BA268600D537A977074A3B706988CFFE3C32365325892A8FCB02BF5F39E29C'
-_version = '3.1.3.2'
+_version = '3.1.3.3'
 _date = '08.11.19'
 _counter = 1
 gr = input('(g)raphic/(t)erminal startup: ')
