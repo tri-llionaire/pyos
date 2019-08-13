@@ -1,15 +1,24 @@
 # -*- coding: utf-8 -*-
-_build = '032'
-_hash = '22911E5A448E5E0C5EBE31FB01FA0180CD76D8860BB487023040DB7269FA9E56'
-_date = '08.11.2019'
-import urllib.request, urllib.error, hashlib, random, sys, data
+_build = '038'
+import urllib.request, urllib.error, hashlib, random, sys, platform
+red = ''
+green = ''
+blue = ''
+white = ''
+term = 'cls'
+if platform.system() == 'Linux':
+    red = '\033[91m'
+    green = '\033[92m'
+    blue = '\033[95m'
+    white = '\033[0m'
+    term = 'clear'
 def check():
     try:
         urllib.request.urlopen('http://216.58.192.142', timeout=1)
         return True
     except urllib.error.URLError:
         return False
-h_char = {' ': '169', '$': '157', '(': '144', ',': '156', '0': '140', '4': '160', '8': '180', '<': '149', '@': '142', 'D': '110', 'H': '138', 'L': '106', 'P': '167', 'T': '126', 'X': '195', '\\': '124', '`': '151', 'd': '159', 'h': '114', 'l': '119', 'p': '139', 't': '174', 'x': '103', '|': '138', '#': '192', "'": '186', '+': '163', '/': '176', '3': '191', '7': '100', ';': '191', '?': '115', 'C': '121', 'G': '154', 'K': '161', 'O': '172', 'S': '197', 'W': '162', '[': '182', '_': '114', 'c': '159', 'g': '101', 'k': '159', 'o': '134', 's': '121', 'w': '123', '{': '185', '"': '193', '&': '118', '*': '172', '.': '106', '2': '135', '6': '119', ': ': '123', '>': '190', 'B': '114', 'F': '180', 'J': '119', 'N': '121', 'R': '119', 'V': '188', 'Z': '102', '^': '133', 'b': '105', 'f': '190', 'j': '113', 'n': '139', 'r': '162', 'v': '152', 'z': '181', '~': '185', '!': '118', '%': '121', ')': '137', '-': '99', '1': '158', '5': '147', '9': '161', '=': '109', 'A': '106', 'E': '179', 'I': '151', 'M': '195', 'Q': '111', 'U': '100', 'Y': '101', ']': '185', 'a': '174', 'e': '172', 'i': '154', 'm': '198', 'q': '145', 'u': '130', 'y': '170', '}': '148'}
+h_char = {' ': '169', '$': '157', '(': '144', ',': '156', '0': '140', '4': '160', '8': '180', '<': '149', '@': '142', 'D': '110', 'H': '138', 'L': '106', 'P': '167', 'T': '126', 'X': '195', '\\': '124', '`': '151', 'd': '159', 'h': '114', 'l': '119', 'p': '139', 't': '174', 'x': '103', '|': '138', '#': '192', '\'': '186', '+': '163', '/': '176', '3': '191', '7': '100', ';': '191', '?': '115', 'C': '121', 'G': '154', 'K': '161', 'O': '172', 'S': '197', 'W': '162', '[': '182', '_': '114', 'c': '159', 'g': '101', 'k': '159', 'o': '134', 's': '121', 'w': '123', '{': '185', '\"': '193', '&': '118', '*': '172', '.': '106', '2': '135', '6': '119', ': ': '123', '>': '190', 'B': '114', 'F': '180', 'J': '119', 'N': '121', 'R': '119', 'V': '188', 'Z': '102', '^': '133', 'b': '105', 'f': '190', 'j': '113', 'n': '139', 'r': '162', 'v': '152', 'z': '181', '~': '185', '!': '118', '%': '121', ')': '137', '-': '99', '1': '158', '5': '147', '9': '161', '=': '109', 'A': '106', 'E': '179', 'I': '151', 'M': '195', 'Q': '111', 'U': '100', 'Y': '101', ']': '185', 'a': '174', 'e': '172', 'i': '154', 'm': '198', 'q': '145', 'u': '130', 'y': '170', '}': '148'}
 def thsh(t_char):
     t_n = ''
     t_which = input('t-hash, md5, sha1, sha256, sha384, or sha512? ')
@@ -614,9 +623,9 @@ def cotw(c_countries, c_answers):
             if c_val == c_value:
                 return c_key
     def c_c_w_r(c_right, c_wrong):
-        return '\n{}{}/{}{}'.format(data.green, c_right, c_wrong, data.white)
+        return '\n{}{}/{}{}'.format(green, c_right, c_wrong, white)
     def c_c_w_w(c_right, c_wrong):
-        return '\n{}{}/{}{}'.format(data.red, c_right, c_wrong, data.white)
+        return '\n{}{}/{}{}'.format(red, c_right, c_wrong, white)
     def c_perc(c_right, c_wrong):
         return '{0:.2f}'.format(100.00 / float(c_total) * float(c_right))
     c_choose = input('Answer with the countries or capitals? (1 or 2): ')
@@ -624,42 +633,42 @@ def cotw(c_countries, c_answers):
         while c_ans.lower() != 'end':
             c_n = random.randint(0, 196)
             print('\n\n')
-            print('What is the capital of the country {}{}{}?\n\n'.format(data.other, c_get_key(c_answers.get(c_countries[c_n])), data.white))
+            print('What is the capital of the country {}{}{}?\n\n'.format(blue, c_get_key(c_answers.get(c_countries[c_n])), white))
             c_ans = input()
             if c_ans.lower() == 'end':
                 pass
             elif c_ans.lower() == c_answers.get(c_countries[c_n]).lower():
-                print('\n{}CORRECT'.format(data.green))
+                print('\n{}CORRECT'.format(green))
                 c_right += 1
                 c_total = c_right + c_wrong
                 print(c_c_w_r(c_right, c_total))
-                print('{}{}'.format(data.other, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(data.white))
+                print('{}{}'.format(blue, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(white))
             else:
-                print('\n{}WRONG. '.format(data.red) + c_answers.get(c_countries[c_n]))
+                print('\n{}WRONG. '.format(red) + c_answers.get(c_countries[c_n]))
                 c_wrong += 1
                 c_total = c_right + c_wrong
                 print(c_c_w_w(c_right, c_total))
-                print('{}{}'.format(data.other, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(data.white))
+                print('{}{}'.format(blue, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(white))
     elif c_choose == '1':
         while c_ans.lower() != 'end':
             c_n = random.randint(0, 196)
             print('\n\n')
-            print('Which country has the capital {}{}{}?\n\n'.format(data.other, c_answers.get(c_countries[c_n]), data.white))
+            print('Which country has the capital {}{}{}?\n\n'.format(blue, c_answers.get(c_countries[c_n]), white))
             c_ans = input()
             if c_ans.lower() == 'end':
                 pass
             elif c_ans.lower() == c_get_key(c_answers.get(c_countries[c_n])).lower():
-                print('\n{}CORRECT'.format(data.green))
+                print('\n{}CORRECT'.format(green))
                 c_right += 1
                 c_total = c_right + c_wrong
                 print(c_c_w_r(c_right, c_total))
-                print('{}{}'.format(data.other, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(data.white))
+                print('{}{}'.format(blue, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(white))
             else:
-                print('\n{}WRONG. '.format(data.red) + c_get_key(c_answers.get(c_countries[c_n])))
+                print('\n{}WRONG. '.format(red) + c_get_key(c_answers.get(c_countries[c_n])))
                 c_wrong += 1
                 c_total = c_right + c_wrong
                 print(c_c_w_w(c_right, c_total))
-                print('{}{}'.format(data.other, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(data.white))
+                print('{}{}'.format(blue, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(white))
     else:
         print('Um')
         pass
