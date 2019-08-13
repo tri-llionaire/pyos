@@ -1,7 +1,45 @@
 # -*- coding: utf-8 -*-
-_build = '046'
-_hash = 'E13F8AAF31B9EBAE7C7AF4FD9E2682D0A4EEFBD6A99D285CF825D2EEFB063801'
-_date = '08.11.2019'
+_build = '063'
+choice = input('(w)eb update or (p)eertopeer update?: ')
+if choice == 'p':
+    second = input('(s)end or (r)eceive?: ')
+    if second == 'r:
+        files = ['main', 'variables', 'manager', 'data']
+        import socket, hashlib
+        s = socket.socket()
+        s.bind((socket.gethostname(), 5004))
+        for x in files:
+            f = open('{}.py'.format(x),'wb')
+            s.listen(5)
+            while True:
+                c, addr = s.accept()
+                print('Got connection for {} from {}'.format(x, addr))
+                print('Receiving {}...'.format(x))
+                l = c.recv(1024)
+                while (l):
+                    f.write(l)
+                    l = c.recv(1024)
+                f.close()
+                print('Done Receiving {}'.format(x))
+                c.close()
+                break
+    if second == 's':
+        files = ['main', 'variables', 'manager', 'data']
+        import socket
+        s = socket.socket()
+        s.connect((socket.gethostname(), 5004))
+        for x in files:
+            f = open('{}.py'.format(x),'rb')
+            print('Sending {}...'.format(x))
+            l = f.read(1024)
+            while (l):
+                s.send(l)
+                l = f.read(1024)
+            f.close()
+            print('Done Sending {}'.format(x))
+        s.shutdown(socket.SHUT_WR)
+        print(s.recv(1024))
+        s.close
 import urllib.request, urllib.parse, urllib.error
 print('checking for internet')
 try:
@@ -11,6 +49,19 @@ except urllib.error.URLError:
     check = 0
 if check == 1:
     print('checking for updates')
+        l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/manager.py'
+    save = urllib.request.urlretrieve(l, 't.txt')
+    r = open('t.txt')
+    words = r.read()
+    r.close()
+    if int(words[34:37]) > int(_build):
+        urllib.request.urlretrieve(l, 'manager.py')
+        print('Manager updated from b{} to b{}'.format(_build, words[34:37]))
+        exec(open('manager.py').read())
+    elif int(words[34:37]) < int(_build):
+        print('(DEV) Update GitHub for manager (b{} to b{})'.format(words[34:37], _build))
+    else:
+        print('Manager up to date (b{})'.format(_build))
     l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/main.py'
     save = urllib.request.urlretrieve(l, 't.txt')
     r = open('t.txt')
@@ -47,37 +98,7 @@ if check == 1:
         print('(DEV) Update GitHub for variables (b{} to b{})'.format(words[34:37], other[34:37]))
     else:
         print('Variables up to date (b{})'.format(other[34:37]))
-    l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/manager.py'
-    save = urllib.request.urlretrieve(l, 't.txt')
-    r = open('t.txt')
-    words = r.read()
-    r.close()
-    if int(words[34:37]) > int(_build):
-        urllib.request.urlretrieve(l, 'manager.py')
-        print('Manager updated from b{} to b{}'.format(_build, words[34:37]))
-    elif int(words[34:37]) < int(_build):
-        print('(DEV) Update GitHub for manager (b{} to b{})'.format(words[34:37], _build))
-    else:
-        print('Manager up to date (b{})'.format(_build))
-    l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/data.py'
-    save = urllib.request.urlretrieve(l, 't.txt')
-    r = open('t.txt')
-    words = r.read()
-    r.close()
-    try:
-        m = open('data.py')
-        other = m.read()
-        m.close()
-    except OSError:
-        words[34:37] = '000'
-    if int(words[34:37]) > int(other[34:37]):
-        urllib.request.urlretrieve(l, 'data.py')
-        print('Data updated from b{} to b{}'.format(other[34:37], words[34:37]))
-    elif int(words[34:37]) < int(other[34:37]):
-        print('(DEV) Update GitHub for data (b{} to b{})'.format(words[34:37], other[34:37]))
-    else:
-        print('Data up to date (b{})'.format(other[34:37]))
     input('Enter to boot pyos')
 else:
     print('no internet')
-exec(open("main.py").read())
+exec(open('main.py').read())
