@@ -1,12 +1,20 @@
 # -*- coding: utf-8 -*-
-_build = '199'
-_hash = '41BA268600D537A977074A3B706988CFFE3C32365325892A8FCB02BF5F39E29C'
-_version = '3.1.3.3'
-_date = '08.11.19'
-_counter = 1
+_build = '209'
 gr = input('(g)raphic/(t)erminal startup: ')
-import subprocess, data
-tmp = subprocess.call(data.term, shell=True)
+import subprocess, data, platform
+red = ''
+green = ''
+other = ''
+white = ''
+term = 'cls'
+if platform.system() == 'Linux':
+    red = '\033[91m'
+    green = '\033[92m'
+    other = '\033[95m'
+    white = '\033[0m'
+    term = 'clear'
+tmp = subprocess.call(term, shell=True)
+_counter = 1
 if gr == 't':
     print('[{:03d}] [0.00000000] boot: starting, getting time'.format(_counter))
     _counter += 1
@@ -18,10 +26,7 @@ if gr == 't':
     print('[{:03d}] [{:.8f}] boot: loading variables'.format(_counter, time.time() - starttime))
     _counter += 1
     import variables
-    print('[{:03d}] [{:.8f}] boot: loading platform'.format(_counter, time.time() - starttime))
-    _counter += 1
-    import platform
-    print('[{:03d}] [{:.8f}] boot: on {}'.format(_counter, time.time() - starttime, platform.uname()))
+    print('[{:03d}] [{:.8f}] boot: on {}{}{}{}{}'.format(_counter, time.time() - starttime, platform.uname().system, platform.uname().release, platform.uname().version, platform.uname().machine, platform.uname().node))
     _counter += 1
     print('[{:03d}] [{:.8f}] boot: checking internet connection'.format(_counter, time.time() - starttime))
     _counter += 1
@@ -38,7 +43,7 @@ if gr == 't':
     _pswd = input('pwd: ')
 else:
     import time, sys, variables, platform
-    sys.stdout.write('PPPP Y  Y OOOO SSSS 3333\nP  P  YY  O  O SS   3333\nPPPP   Y  O  O   SS    3\nP      Y  OOOO SSSS 3333\n\n\n        login\n')
+    sys.stdout.write('PPPPP Y   Y OOOOO SSSSS 33333\nP   P  Y Y  O   O S         3\nPPPPP   Y   O   O SSSSS 33333\nP       Y   O   O     S     3\nP       Y   OOOOO SSSSS 33333\n\n\n        login\n')
     _user = input('        usr: ')
     _pswd = input('        pwd: ')
 if _user == 'root' and _pswd == 'root':
@@ -53,9 +58,9 @@ cmdlist = ['start', 'exit', 'rb', 'cd', 'md', 'ls', 'pd', 'cf', 'cl', 'help', 'c
 filedict = {}
 waiting = 0
 added = []
-tmp = subprocess.call(data.term, shell=True)
-print('pyos 3.1.3.1 194.021.041 08.11.19 Price et al Mingle, Swan')
-sys.stdout.write('(pysh 1.0.6) ')
+tmp = subprocess.call(term, shell=True)
+print('pyos 3.2.5.1 209.038.063 08.13.19 Price et al Mingle, Swan')
+sys.stdout.write('(pysh 1.0.7) ')
 entered = 'start'
 if entered == 'start':
     while entered != 'exit':
@@ -104,9 +109,9 @@ if entered == 'start':
                     elif x == 'help':
                         print('exit: exit pyos\nrb: reboot pyos\ncd $: change directory to $\nmd $: create directory $\nls: list contents of current directory\npd: print working directory (useless)\ncf $: create file $\ncat $: print contents of $\ndel $: delete file $\nedit $: edit file $\ncl: clear screen\nhelp: show this\ncotw: start countriesoftheworld\nscan: start utf8scan6\nhash: start hash converter')
                     elif x == 'cl':
-                        tmp = subprocess.call(data.term, shell=True)
+                        tmp = subprocess.call(term, shell=True)
                     elif x == 'rb':
-                        exec(open('main.py').read())
+                        exec(open('manager.py').read())
                     else:
                         sys.exit()
                 else:
@@ -164,5 +169,3 @@ if entered == 'start':
                 else:
                     print('pyos: pysh: {} not found.'.format(x))
                     waiting = 0
-else:
-    print('pyos: {} not found'.format(entered))
