@@ -3,7 +3,7 @@ _build = '063'
 choice = input('(w)eb update or (p)eertopeer update?: ')
 if choice == 'p':
     second = input('(s)end or (r)eceive?: ')
-    if second == 'r:
+    if second == 'r':
         files = ['main', 'variables', 'manager', 'data']
         import socket, hashlib
         s = socket.socket()
