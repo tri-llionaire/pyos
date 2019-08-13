@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-_build = '063'
+_build = '066'
 choice = input('(w)eb update or (p)eertopeer update?: ')
 if choice == 'p':
     second = input('(s)end or (r)eceive?: ')
     if second == 'r':
-        files = ['main', 'variables', 'manager', 'data']
+        files = ['main', 'variables', 'manager']
         import socket, hashlib
         s = socket.socket()
         s.bind((socket.gethostname(), 5004))
         for x in files:
-            f = open('{}.py'.format(x),'wb')
+            f = open('{}.py'.format(x), 'wb')
             s.listen(5)
             while True:
                 c, addr = s.accept()
@@ -24,12 +24,12 @@ if choice == 'p':
                 c.close()
                 break
     if second == 's':
-        files = ['main', 'variables', 'manager', 'data']
+        files = ['main', 'variables', 'manager']
         import socket
         s = socket.socket()
         s.connect((socket.gethostname(), 5004))
         for x in files:
-            f = open('{}.py'.format(x),'rb')
+            f = open('{}.py'.format(x), 'rb')
             print('Sending {}...'.format(x))
             l = f.read(1024)
             while (l):
@@ -49,19 +49,6 @@ except urllib.error.URLError:
     check = 0
 if check == 1:
     print('checking for updates')
-        l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/manager.py'
-    save = urllib.request.urlretrieve(l, 't.txt')
-    r = open('t.txt')
-    words = r.read()
-    r.close()
-    if int(words[34:37]) > int(_build):
-        urllib.request.urlretrieve(l, 'manager.py')
-        print('Manager updated from b{} to b{}'.format(_build, words[34:37]))
-        exec(open('manager.py').read())
-    elif int(words[34:37]) < int(_build):
-        print('(DEV) Update GitHub for manager (b{} to b{})'.format(words[34:37], _build))
-    else:
-        print('Manager up to date (b{})'.format(_build))
     l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/main.py'
     save = urllib.request.urlretrieve(l, 't.txt')
     r = open('t.txt')
@@ -98,6 +85,19 @@ if check == 1:
         print('(DEV) Update GitHub for variables (b{} to b{})'.format(words[34:37], other[34:37]))
     else:
         print('Variables up to date (b{})'.format(other[34:37]))
+    l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/manager.py'
+    save = urllib.request.urlretrieve(l, 't.txt')
+    r = open('t.txt')
+    words = r.read()
+    r.close()
+    if int(words[34:37]) > int(_build):
+        urllib.request.urlretrieve(l, 'manager.py')
+        print('Manager updated from b{} to b{}'.format(_build, words[34:37]))
+        exec(open('manager.py').read())
+    elif int(words[34:37]) < int(_build):
+        print('(DEV) Update GitHub for manager (b{} to b{})'.format(words[34:37], _build))
+    else:
+        print('Manager up to date (b{})'.format(_build))
     input('Enter to boot pyos')
 else:
     print('no internet')
