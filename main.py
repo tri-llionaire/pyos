@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-_build = '209'
+_build = '210'
 gr = input('(g)raphic/(t)erminal startup: ')
-import subprocess, data, platform
+import subprocess, platform
 red = ''
 green = ''
 other = ''
@@ -59,7 +59,7 @@ filedict = {}
 waiting = 0
 added = []
 tmp = subprocess.call(term, shell=True)
-print('pyos 3.2.5.1 209.038.063 08.13.19 Price et al Mingle, Swan')
+print('pyos 3.2.5.2 210.038.066 08.13.19 Price et al Mingle, Swan')
 sys.stdout.write('(pysh 1.0.7) ')
 entered = 'start'
 if entered == 'start':
@@ -111,7 +111,7 @@ if entered == 'start':
                     elif x == 'cl':
                         tmp = subprocess.call(term, shell=True)
                     elif x == 'rb':
-                        exec(open('manager.py').read())
+                        exec(open('main.py').read())
                     else:
                         sys.exit()
                 else:
