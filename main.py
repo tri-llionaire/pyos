@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '233'
+_build = '234'
 import subprocess, platform
 red = ''
 green = ''
@@ -39,7 +39,7 @@ filedict = {}
 waiting = 0
 added = []
 tmp = subprocess.call(term, shell=True)
-print('pyos 3.3.0.2 233.043.071 08.14.19 Price et al Mingle, Swan')
+print('pyos 3.3.0.3 234.043.071 08.14.19 Price et al Mingle, Swan')
 if _user == 'root' and _pswd == 'root':
     _path = 'root/'
     paths = ['root/']
@@ -99,7 +99,7 @@ if entered == 'start':
                     elif x == 'cl':
                         tmp = subprocess.call(term, shell=True)
                     elif x == 'rb':
-                        exec(open('main.py').read())
+                        exec(open('manager.py').read())
                     else:
                         sys.exit()
                 else:
