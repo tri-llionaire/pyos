@@ -1,53 +1,48 @@
 # -*- coding: utf-8 -*-
-_build = '066'
-choice = input('(w)eb update or (p)eertopeer update?: ')
-if choice == 'p':
-    second = input('(s)end or (r)eceive?: ')
-    if second == 'r':
-        files = ['main', 'variables', 'manager']
-        import socket, hashlib
-        s = socket.socket()
-        s.bind((socket.gethostname(), 5004))
-        for x in files:
-            f = open('{}.py'.format(x), 'wb')
-            s.listen(5)
-            while True:
-                c, addr = s.accept()
-                print('Got connection for {} from {}'.format(x, addr))
-                print('Receiving {}...'.format(x))
-                l = c.recv(1024)
-                while (l):
-                    f.write(l)
-                    l = c.recv(1024)
-                f.close()
-                print('Done Receiving {}'.format(x))
-                c.close()
-                break
-    if second == 's':
-        files = ['main', 'variables', 'manager']
-        import socket
-        s = socket.socket()
-        s.connect((socket.gethostname(), 5004))
-        for x in files:
-            f = open('{}.py'.format(x), 'rb')
-            print('Sending {}...'.format(x))
-            l = f.read(1024)
-            while (l):
-                s.send(l)
-                l = f.read(1024)
-            f.close()
-            print('Done Sending {}'.format(x))
-        s.shutdown(socket.SHUT_WR)
-        print(s.recv(1024))
-        s.close
-import urllib.request, urllib.parse, urllib.error
+_build = '071'
+import variables, urllib
 print('checking for internet')
-try:
-    urllib.request.urlopen('http://216.58.192.142', timeout=1)
-    check = 1
-except urllib.error.URLError:
-    check = 0
-if check == 1:
+if variables.check() is True:
+    choice = input('(w)eb update or (p)eertopeer update?: ')
+    if choice == 'p':
+        second = input('(s)end or (r)eceive?: ')
+        if second == 'r':
+            files = ['main', 'variables', 'manager']
+            import socket, hashlib
+            s = socket.socket()
+            s.bind((socket.gethostname(), 5004))
+            for x in files:
+                f = open('{}.py'.format(x), 'wb')
+                s.listen(5)
+                while True:
+                    c, addr = s.accept()
+                    print('Got connection for {} from {}'.format(x, addr))
+                    print('Receiving {}...'.format(x))
+                    l = c.recv(1024)
+                    while (l):
+                        f.write(l)
+                        l = c.recv(1024)
+                    f.close()
+                    print('Done Receiving {}'.format(x))
+                    c.close()
+                    break
+        if second == 's':
+            files = ['main', 'variables', 'manager']
+            import socket
+            s = socket.socket()
+            s.connect((socket.gethostname(), 5004))
+            for x in files:
+                f = open('{}.py'.format(x), 'rb')
+                print('Sending {}...'.format(x))
+                l = f.read(1024)
+                while (l):
+                    s.send(l)
+                    l = f.read(1024)
+                f.close()
+                print('Done Sending {}'.format(x))
+            s.shutdown(socket.SHUT_WR)
+            print(s.recv(1024))
+            s.close
     print('checking for updates')
     l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/main.py'
     save = urllib.request.urlretrieve(l, 't.txt')
