@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '210'
-gr = input('(g)raphic/(t)erminal startup: ')
+_build = '233'
 import subprocess, platform
 red = ''
 green = ''
@@ -14,53 +13,42 @@ if platform.system() == 'Linux':
     white = '\033[0m'
     term = 'clear'
 tmp = subprocess.call(term, shell=True)
-_counter = 1
-if gr == 't':
-    print('[{:03d}] [0.00000000] boot: starting, getting time'.format(_counter))
-    _counter += 1
-    import time
-    starttime = time.time()
-    print('[{:03d}] [{:.8f}] boot: loading sys'.format(_counter, time.time() - starttime))
-    _counter += 1
-    import sys
-    print('[{:03d}] [{:.8f}] boot: loading variables'.format(_counter, time.time() - starttime))
-    _counter += 1
-    import variables
-    print('[{:03d}] [{:.8f}] boot: on {}{}{}{}{}'.format(_counter, time.time() - starttime, platform.uname().system, platform.uname().release, platform.uname().version, platform.uname().machine, platform.uname().node))
-    _counter += 1
-    print('[{:03d}] [{:.8f}] boot: checking internet connection'.format(_counter, time.time() - starttime))
-    _counter += 1
-    if variables.check() is True:
-        _internet = True
-        print('[{:03d}] [{:.8f}] boot: internet connection succeeded'.format(_counter, time.time() - starttime))
-        _counter += 1
-    else:
-        _internet = False
-        print('[{:03d}] [{:.8f}] boot: internet connection failed'.format(_counter, time.time() - starttime))
-        _counter += 1
-    print('[{:03d}] [{:.8f}] boot: loading login'.format(_counter, time.time() - starttime))
-    _user = input('usr: ')
-    _pswd = input('pwd: ')
+print('[001] [0.00000000] boot: starting, getting time')
+import time
+starttime = time.time()
+print('[002] [{:.8f}] boot: loading sys'.format(time.time() - starttime))
+import sys
+print('[003] [{:.8f}] boot: loading variables'.format(time.time() - starttime))
+import variables
+print('[004] [{:.8f}] boot: loading datetime'.format(time.time() - starttime))
+import datetime
+print('[005] [{:.8f}] boot: on {}{}{}{}{}'.format(time.time() - starttime, platform.system(), platform.release(), platform.version(), platform.machine(), platform.node()))
+print('[006] [{:.8f}] boot: checking internet connection'.format(time.time() - starttime))
+if variables.check() is True:
+    _internet = ''
+    print('[007] [{:.8f}] boot: internet connection succeeded'.format(time.time() - starttime))
 else:
-    import time, sys, variables, platform
-    sys.stdout.write('PPPPP Y   Y OOOOO SSSSS 33333\nP   P  Y Y  O   O S         3\nPPPPP   Y   O   O SSSSS 33333\nP       Y   O   O     S     3\nP       Y   OOOOO SSSSS 33333\n\n\n        login\n')
-    _user = input('        usr: ')
-    _pswd = input('        pwd: ')
-if _user == 'root' and _pswd == 'root':
-    _path = 'root/'
-    paths = ['root/']
-else:
-    print('incorrect login')
-    _path = 'temp/'
-    paths = ['temp/']
-print('\n\n\n')
+    _internet = 'No '
+    print('[007] [{:.8f}] boot: internet connection failed'.format(time.time() - starttime))
+    print('[008] [{:.8f}] boot: loading login'.format(time.time() - starttime))
+sys.stdout.write('\n\nPPPPP Y   Y OOOOO SSSSS 33333\nP   P  Y Y  O   O S         3\nPPPPP   Y   O   O SSSSS 33333\nP       Y   O   O     S     3\nP       Y   OOOOO SSSSS 33333\n\n\n        login\n')
+_user = input('        usr: ')
+_pswd = input('        pwd: ')
 cmdlist = ['start', 'exit', 'rb', 'cd', 'md', 'ls', 'pd', 'cf', 'cl', 'help', 'cotw', 'scan', 'hash', 'cat', 'edit', 'del']
 filedict = {}
 waiting = 0
 added = []
 tmp = subprocess.call(term, shell=True)
-print('pyos 3.2.5.2 210.038.066 08.13.19 Price et al Mingle, Swan')
-sys.stdout.write('(pysh 1.0.7) ')
+print('pyos 3.3.0.2 233.043.071 08.14.19 Price et al Mingle, Swan')
+if _user == 'root' and _pswd == 'root':
+    _path = 'root/'
+    paths = ['root/']
+else:
+    sys.stdout.write('(Incorrect login) ')
+    _path = 'temp/'
+    paths = ['temp/']
+print('Last login at {} UTC\n{}Internet connection'.format( datetime.datetime.now(), _internet))
+sys.stdout.write('(pysh 1.1.1) ')
 entered = 'start'
 if entered == 'start':
     while entered != 'exit':
@@ -101,13 +89,13 @@ if entered == 'start':
                     elif x == 'start':
                         print('already in pysh')
                     elif x == 'cotw':
-                        variables.cotw(variables.c_countries, variables.c_answers)
+                        variables.cotw(variables.c_countries, variables.c_answers, '0')
                     elif x == 'scan':
-                        variables.scan()
+                        variables.scan('0', '0')
                     elif x == 'hash':
-                        variables.thsh(variables.h_char)
+                        variables.thsh(variables.h_char, '0')
                     elif x == 'help':
-                        print('exit: exit pyos\nrb: reboot pyos\ncd $: change directory to $\nmd $: create directory $\nls: list contents of current directory\npd: print working directory (useless)\ncf $: create file $\ncat $: print contents of $\ndel $: delete file $\nedit $: edit file $\ncl: clear screen\nhelp: show this\ncotw: start countriesoftheworld\nscan: start utf8scan6\nhash: start hash converter')
+                        print('exit: exit pyos\nrb: reboot pyos\ncd $: change directory to $\nmd $: create directory $\nls: list contents of current directory\npd: print working directory (useless)\ncf $: create file $\ncat $: print contents of $\ndel $: delete file $\nedit $: edit file $\ncl: clear screen\nhelp: show this\ncotw(x): start countriesoftheworld with optional parameters for settings\nscan(x)(x): start utf8scan6 with optional parameters for settings and hashes\nhash(x): start hash converter with optional parameters for hashes')
                     elif x == 'cl':
                         tmp = subprocess.call(term, shell=True)
                     elif x == 'rb':
@@ -166,6 +154,28 @@ if entered == 'start':
                         _path = paths[0]
                     else:
                         pass
+                elif x.startswith('scan'):
+                    valid1 = ['3', '4', '5']
+                    valid2 = ['1', '2']
+                    valid3 = ['md5', 'sha1', 't-hash', 'sha256', 'sha384', 'sha512']
+                    if x[4] in valid1 and x[5:] in valid3:
+                        variables.scan(x[4], x[5:])
+                    elif x[4] in valid2:
+                        variables.scan(x[4], '0')
+                    else:
+                        variables.scan('0', '0')
+                elif x.startswith('cotw'):
+                    valid1 = ['1', '2']
+                    if x[4] in valid1:
+                        variables.cotw(variables.c_countries, variables.c_answers, x[4])
+                    else:
+                        variables.cotw(variables.c_countries, variables.c_answers, '0')
+                elif x.startswith('hash'):
+                    valid2 = ['md5', 'sha1', 't-hash', 'sha256', 'sha384', 'sha512']
+                    if x[4:] in valid2:
+                        variables.thsh(variables.h_char, x[4:])
+                    else:
+                        variables.thsh(variables.h_char, '0')
                 else:
                     print('pyos: pysh: {} not found.'.format(x))
                     waiting = 0
