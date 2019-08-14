@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '038'
+_build = '043'
 import urllib.request, urllib.error, hashlib, random, sys, platform
 red = ''
 green = ''
@@ -19,9 +19,10 @@ def check():
     except urllib.error.URLError:
         return False
 h_char = {' ': '169', '$': '157', '(': '144', ',': '156', '0': '140', '4': '160', '8': '180', '<': '149', '@': '142', 'D': '110', 'H': '138', 'L': '106', 'P': '167', 'T': '126', 'X': '195', '\\': '124', '`': '151', 'd': '159', 'h': '114', 'l': '119', 'p': '139', 't': '174', 'x': '103', '|': '138', '#': '192', '\'': '186', '+': '163', '/': '176', '3': '191', '7': '100', ';': '191', '?': '115', 'C': '121', 'G': '154', 'K': '161', 'O': '172', 'S': '197', 'W': '162', '[': '182', '_': '114', 'c': '159', 'g': '101', 'k': '159', 'o': '134', 's': '121', 'w': '123', '{': '185', '\"': '193', '&': '118', '*': '172', '.': '106', '2': '135', '6': '119', ': ': '123', '>': '190', 'B': '114', 'F': '180', 'J': '119', 'N': '121', 'R': '119', 'V': '188', 'Z': '102', '^': '133', 'b': '105', 'f': '190', 'j': '113', 'n': '139', 'r': '162', 'v': '152', 'z': '181', '~': '185', '!': '118', '%': '121', ')': '137', '-': '99', '1': '158', '5': '147', '9': '161', '=': '109', 'A': '106', 'E': '179', 'I': '151', 'M': '195', 'Q': '111', 'U': '100', 'Y': '101', ']': '185', 'a': '174', 'e': '172', 'i': '154', 'm': '198', 'q': '145', 'u': '130', 'y': '170', '}': '148'}
-def thsh(t_char):
+def thsh(t_char, t_which):
     t_n = ''
-    t_which = input('t-hash, md5, sha1, sha256, sha384, or sha512? ')
+    if t_which == '0':
+        t_which = input('t-hash, md5, sha1, sha256, sha384, or sha512? ')
     if t_which == 't-hash':
         t_key = int(input('enter a key (2-100): '))
         if 2 <= t_key <= 100:
@@ -80,15 +81,16 @@ def otherhash(s_hs, s_st):
         s_st = hashlib.sha512(s_st.encode()).hexdigest()
     else:
         pass
-def scan():
-    s_x = 0
-    s_ch = input('python utf8scan6.3.3\nchoose an option to convert:\n1: Non-condensed, non-hashed\n2: Condensed, non-hashed\n3: Non-condensed, hashed\n4: Condensed, hashed\n5: Super condensed, hashed\n')
-    if s_ch == '3' or s_ch == '4' or s_ch == '5':
-        s_hs = input('t-hash, md5, sha1, sha256, sha384, or sha512?: ')
+def scan(s_ch, s_hs):
+    if s_ch == '0' and s_hs == '0':
+        s_ch = input('python utf8scan6.3.3\nchoose an option to convert:\n1: Non-condensed, non-hashed\n2: Condensed, non-hashed\n3: Non-condensed, hashed\n4: Condensed, hashed\n5: Super condensed, hashed\n')
+        if s_ch == '3' or s_ch == '4' or s_ch == '5':
+            s_hs = input('t-hash, md5, sha1, sha256, sha384, or sha512?: ')
     s_st = input('enter your string: ')
     s_r = len(s_st) + 3
     s_z = len(s_st) + 5
     s_bi = ''.join(format(ord(s_x), 'b') for s_x in s_st)
+    s_x = 0
     def s_output_end(s_x, s_r):
         sys.stdout.write(' '*(s_r-s_x))
         sys.stdout.write('|\n\\'+(s_r*'-')+'/\n')
@@ -612,7 +614,7 @@ c_answers = {
     'Zambia': 'Lusaka',
     'Zimbabwe': 'Harare',
 }
-def cotw(c_countries, c_answers):
+def cotw(c_countries, c_answers, c_choose):
     c_right = 0
     c_wrong = 0
     c_total = c_right + c_wrong
@@ -628,8 +630,9 @@ def cotw(c_countries, c_answers):
         return '\n{}{}/{}{}'.format(red, c_right, c_wrong, white)
     def c_perc(c_right, c_wrong):
         return '{0:.2f}'.format(100.00 / float(c_total) * float(c_right))
-    c_choose = input('Answer with the countries or capitals? (1 or 2): ')
-    if c_choose == '2':
+    if c_choose == '0':
+        c_choose = input('Answer with the countries or capitals? (1 or 2): ')
+    elif c_choose == '2':
         while c_ans.lower() != 'end':
             c_n = random.randint(0, 196)
             print('\n\n')
