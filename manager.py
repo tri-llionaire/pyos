@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-_build = '071'
-import variables, urllib
+_build = '075'
+import urllib
+from variables import check
 print('checking for internet')
-if variables.check() is True:
+if check.check() is True:
     choice = input('(w)eb update or (p)eertopeer update?: ')
     if choice == 'p':
         second = input('(s)end or (r)eceive?: ')
@@ -45,7 +46,7 @@ if variables.check() is True:
             s.close
     print('checking for updates')
     l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/main.py'
-    save = urllib.request.urlretrieve(l, 't.txt')
+    urllib.request.urlretrieve(l, 't.txt')
     r = open('t.txt')
     words = r.read()
     r.close()
@@ -63,7 +64,7 @@ if variables.check() is True:
     else:
         print('Main up to date (b{})'.format(other[34:37]))
     l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/variables.py'
-    save = urllib.request.urlretrieve(l, 't.txt')
+    urllib.request.urlretrieve(l, 't.txt')
     r = open('t.txt')
     words = r.read()
     r.close()
@@ -81,7 +82,7 @@ if variables.check() is True:
     else:
         print('Variables up to date (b{})'.format(other[34:37]))
     l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/manager.py'
-    save = urllib.request.urlretrieve(l, 't.txt')
+    urllib.request.urlretrieve(l, 't.txt')
     r = open('t.txt')
     words = r.read()
     r.close()
