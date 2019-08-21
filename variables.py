@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '057'
+_build = '058'
 import urllib.request, urllib.error, hashlib, random, sys, platform
 red = ''
 green = ''
@@ -669,8 +669,7 @@ class cotw:
 class stock:
     def stocks():
         money = 50
-        print('(3.6.0) Welcome to Python Stock Central!')
-        print('How much money can you make in 10 days?')
+        print('(3.6.1) Welcome to Python Stock Central!\nHow much money can you make in 10 days?\n\'end\' to quit')
         yours = []
         stocks = {
             'Microsoft': 20,
@@ -746,6 +745,8 @@ class stock:
             else:
                 print('\nYou have ${} before purchases.'.format(money))
                 which = input('What would you like to invest in? ').split()
+                if which == 'end':
+                    break
                 for i in which:
                     if i in stocks:
                         if i != yours:
