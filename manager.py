@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-_build = '075'
-import urllib
+_build = '076'
+import urllib, platform, subprocess
 from variables import check
 print('checking for internet')
 if check.check() is True:
@@ -97,4 +97,8 @@ if check.check() is True:
     input('Enter to boot pyos')
 else:
     print('no internet')
+term = 'cls'
+if platform.system() == 'Linux':
+    term = 'clear'
+tmp = subprocess.call(term, shell=True)
 exec(open('main.py').read())
