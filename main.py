@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
-_build = '300'
-print('setting up boot requirements')
-import subprocess, platform
+_build = '304'
+print('[001] [0.00000000] boot: starting, getting time')
+import time
+starttime = time.time()
+print('[002] [{:.8f}] boot: loading subprocess'.format(time.time() - starttime))
+import subprocess
+print('[003] [{:.8f}] boot: loading subprocess'.format(time.time() - starttime))
+import platform
+print('[004] [{:.8f}] boot: loading terminal commands'.format(time.time() - starttime))
 red = ''
 green = ''
 yellow = ''
@@ -19,48 +25,44 @@ if platform.system() == 'Linux':
     cyan = '\033[96m'
     white = '\033[0m'
     term = 'clear'
-tmp = subprocess.call(term, shell=True)
-print('[001] [0.00000000] boot: starting, getting time')
-import time
-starttime = time.time()
-print('[002] [{:.8f}] boot: on {}{}{}{}{}'.format(time.time() - starttime, platform.system(), platform.release(), platform.version(), platform.machine(), platform.node()))
-print('[003] [{:.8f}] boot: loading sys'.format(time.time() - starttime))
+print('[005] [{:.8f}] boot: on {}{}{}{}{}'.format(time.time() - starttime, platform.system(), platform.release(), platform.version(), platform.machine(), platform.node()))
+print('[006] [{:.8f}] boot: loading sys'.format(time.time() - starttime))
 import sys
-print('[004] [{:.8f}] boot: loading internetcheck'.format(time.time() - starttime))
+print('[007] [{:.8f}] boot: loading internetcheck'.format(time.time() - starttime))
 from variables import check
-print('[005] [{:.8f}] boot: loading hashing'.format(time.time() - starttime))
+print('[008] [{:.8f}] boot: loading hashing'.format(time.time() - starttime))
 from variables import hashing
-print('[006] [{:.8f}] boot: loading scan'.format(time.time() - starttime))
+print('[009] [{:.8f}] boot: loading scan'.format(time.time() - starttime))
 from variables import scan
-print('[007] [{:.8f}] boot: loading cotw'.format(time.time() - starttime))
+print('[010] [{:.8f}] boot: loading cotw'.format(time.time() - starttime))
 from variables import cotw
-print('[008] [{:.8f}] boot: loading cotw'.format(time.time() - starttime))
+print('[011] [{:.8f}] boot: loading cotw'.format(time.time() - starttime))
 from variables import stock
-print('[009] [{:.8f}] boot: loading date'.format(time.time() - starttime))
+print('[012] [{:.8f}] boot: loading date'.format(time.time() - starttime))
 import datetime
-print('[010] [{:.8f}] boot: loading getpass'.format(time.time() - starttime))
+print('[013] [{:.8f}] boot: loading getpass'.format(time.time() - starttime))
 import getpass
-print('[011] [{:.8f}] boot: checking internet connection'.format(time.time() - starttime))
+print('[014] [{:.8f}] boot: checking internet connection'.format(time.time() - starttime))
 if check.check() is True:
     _internet = ''
-    print('[012] [{:.8f}] boot: internet connection succeeded'.format(time.time() - starttime))
-    print('[013] [{:.8f}] boot: loading urllib'.format(time.time() - starttime))
+    print('[015] [{:.8f}] boot: internet connection succeeded'.format(time.time() - starttime))
+    print('[016] [{:.8f}] boot: loading urllib'.format(time.time() - starttime))
     import urllib
-    print('[014] [{:.8f}] boot: loading landrum weather'.format(time.time() - starttime))
+    print('[017] [{:.8f}] boot: loading landrum weather'.format(time.time() - starttime))
     urllib.request.urlretrieve('http://api.openweathermap.org/data/2.5/weather?q=Landrum&APPID=b35975e18dc93725acb092f7272cc6b8&units=imperial', 't.txt')
     z = open('t.txt')
     p = z.read().split('\"')
     z.close()
-    print('[015] [{:.8f}] boot: loading cnn headlines'.format(time.time() - starttime))
+    print('[018] [{:.8f}] boot: loading cnn headlines'.format(time.time() - starttime))
     urllib.request.urlretrieve('https://lite.cnn.io/en', 't.txt')
     q = open('t.txt')
     v = q.read().split('\">')
     q.close()
-    print('[016] [{:.8f}] boot: completed, loading login'.format(time.time() - starttime))
+    print('[019] [{:.8f}] boot: completed, loading login'.format(time.time() - starttime))
 else:
     _internet = '{}No '.format(green)
-    print('[012] [{:.8f}] boot: internet connection failed'.format(time.time() - starttime))
-    print('[013] [{:.8f}] boot: completed, loading login'.format(time.time() - starttime))
+    print('[015] [{:.8f}] boot: internet connection failed'.format(time.time() - starttime))
+    print('[016] [{:.8f}] boot: completed, loading login'.format(time.time() - starttime))
 sys.stdout.write('\nPPPPP Y   Y OOOOO SSSSS 33333\nP   P  Y Y  O   O S         3\nPPPPP   Y   O   O SSSSS 33333\nP       Y   O   O     S     3\nP       Y   OOOOO SSSSS 33333\n\nCCC OOO L   DD    CCC OOO W W\nC   O O L   DDD   C   O O WWW\nCCC OOO LLL DDD   CCC OOO WWW\n\n\n        login\n')
 _user = input('        usr: ')
 _pswd = getpass.getpass(prompt='        pwd: ')
@@ -71,7 +73,7 @@ addi = ''
 added = []
 varis = {}
 tmp = subprocess.call(term, shell=True)
-print('pyos 3.4.4.8 cold cow {}.057.075 08.20.19 @tri-llionaire with @dentafrice, @Akuhcap'.format(_build))
+print('pyos 3.4.4.9 cold cow {}.058.076 08.20.19 @tri-llionaire with @dentafrice, @Akuhcap'.format(_build))
 if _user == 'root' and _pswd == 'root':
     _path = 'root/'
     paths = ['root/']
@@ -79,7 +81,7 @@ else:
     sys.stdout.write('Incorrect ')
     _path = 'temp/'
     paths = ['temp/']
-print('Login at {}{} UTC\n{}{}Internet connection\n{}Weather in Landrum: {}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(red, datetime.datetime.now(), green, _internet, white, yellow, p[30][1:-1], white, blue, p[13], white, magenta, p[34][1:-1], white, cyan, p[44][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
+print('Login at {}{} UTC\n{}{}Internet connection\n{}Weather in Landrum: {}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(red, datetime.datetime.now(), green, _internet, white, yellow, p[44][1:-1], white, blue, p[13], white, magenta, p[48][1:-1], white, cyan, p[58][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
 sys.stdout.write('(pysh 1.2.7) ')
 entered = 'start'
 if entered == 'start':
