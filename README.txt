@@ -1,6 +1,6 @@
 pyos
 python 3.7.4  
-3.4.4.9 (304/058/076) 08-20-19 @tri-llionaire with @dentafrice, @Akuhcap
+3.4.4.9 (304/058/076) 08-21-19 @tri-llionaire with @dentafrice, @Akuhcap
 download and run manager
 
 latest updates:
