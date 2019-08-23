@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '076'
+_build = '077'
 import urllib, platform, subprocess
 from variables import check
 print('checking for internet')
@@ -46,8 +46,8 @@ if check.check() is True:
             s.close
     print('checking for updates')
     l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/main.py'
-    urllib.request.urlretrieve(l, 't.txt')
-    r = open('t.txt')
+    urllib.request.urlretrieve(l, 'cache')
+    r = open('cache')
     words = r.read()
     r.close()
     try:
@@ -64,8 +64,8 @@ if check.check() is True:
     else:
         print('Main up to date (b{})'.format(other[34:37]))
     l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/variables.py'
-    urllib.request.urlretrieve(l, 't.txt')
-    r = open('t.txt')
+    urllib.request.urlretrieve(l, 'cache')
+    r = open('cache')
     words = r.read()
     r.close()
     try:
@@ -82,8 +82,8 @@ if check.check() is True:
     else:
         print('Variables up to date (b{})'.format(other[34:37]))
     l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/manager.py'
-    urllib.request.urlretrieve(l, 't.txt')
-    r = open('t.txt')
+    urllib.request.urlretrieve(l, 'cache')
+    r = open('cache')
     words = r.read()
     r.close()
     if int(words[34:37]) > int(_build):
