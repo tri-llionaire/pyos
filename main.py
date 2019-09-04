@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '354'
+_build = '365'
 try:
     print('loading time')
     import time
@@ -8,7 +8,7 @@ try:
     n.write('started main log\n')
     print('[{:.8f}] boot: loading platform'.format(time.time() - starttime))
     import platform
-    n.write('[{:.8f}] status: platform loaded')
+    n.write('[{:.8f}] status: platform loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading terminal commands'.format(time.time() - starttime))
     red = ''
     green = ''
@@ -29,60 +29,86 @@ try:
         term = 'clear'
     n.write('[{:.8f}] status: terminal commands loaded\n')
     print('[{:.8f}] boot: on {}{}{}{}{}'.format(time.time() - starttime, platform.system(), platform.release(), platform.version(), platform.machine(), platform.node()))
+    n.write('[{:.8f}] boot: on {}{}{}{}{}'.format(time.time() - starttime, platform.system(), platform.release(), platform.version(), platform.machine(), platform.node()))
     print('[{:.8f}] boot: loading subprocess'.format(time.time() - starttime))
     import subprocess
+    n.write('[{:.8f}] boot: subprocess loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading sys'.format(time.time() - starttime))
     import sys
+    n.write('[{:.8f}] boot: sys loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading internetcheck'.format(time.time() - starttime))
     from variables import check
+    n.write('[{:.8f}] boot: variables.check loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading hashing'.format(time.time() - starttime))
     from variables import hashing
+    n.write('[{:.8f}] boot: variables.hashing loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading scan'.format(time.time() - starttime))
     from variables import scan
+    n.write('[{:.8f}] boot: variables.scan loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading cotw'.format(time.time() - starttime))
     from variables import cotw
+    n.write('[{:.8f}] boot: variables.cotw loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading stock'.format(time.time() - starttime))
     from variables import stock
+    n.write('[{:.8f}] boot: variables.stock loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading clocking'.format(time.time() - starttime))
     from variables import clock
+    n.write('[{:.8f}] boot: variables.clock loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading convert'.format(time.time() - starttime))
     from variables import convert
-    print('[{:.8f}] boot: loading date'.format(time.time() - starttime))
+    n.write('[{:.8f}] boot: variables.convert loaded\n'.format(time.time() - starttime))
+    print('[{:.8f}] boot: loading datetime'.format(time.time() - starttime))
     import datetime
+    n.write('[{:.8f}] boot: datetime loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading getpass'.format(time.time() - starttime))
     import getpass
+    n.write('[{:.8f}] boot: getpass loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading hashlib'.format(time.time() - starttime))
     import hashlib
+    n.write('[{:.8f}] boot: hashlib loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading data'.format(time.time() - starttime))
     y = open('data', 'r')
     data = y.read()
     y.close()
+    n.write('[{:.8f}] boot: data loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: checking internet connection'.format(time.time() - starttime))
     if check.check() is True:
         _internet = ''
         print('[{:.8f}] boot: internet connection succeeded'.format(time.time() - starttime))
+        n.write('[{:.8f}] boot: internet connection\n'.format(time.time() - starttime))
         print('[{:.8f}] boot: loading urllib'.format(time.time() - starttime))
         import urllib
-        print('[{:.8f}] boot: loading landrum weather'.format(time.time() - starttime))
+        n.write('[{:.8f}] boot: loaded urllib\n'.format(time.time() - starttime))
+        print('[{:.8f}] boot: getting landrum weather'.format(time.time() - starttime))
         urllib.request.urlretrieve('http://api.openweathermap.org/data/2.5/weather?q=Landrum&APPID=b35975e18dc93725acb092f7272cc6b8&units=imperial', 'cache')
+        n.write('[{:.8f}] boot: got landrum weather\n'.format(time.time() - starttime))
         print('[{:.8f}] boot: loading cache weather'.format(time.time() - starttime))
         z = open('cache', 'r')
         p = z.read().split('\"')
         z.close()
-        print('[{:.8f}] boot: loading cnn headlines'.format(time.time() - starttime))
+        n.write('[{:.8f}] boot: loaded cache weather\n'.format(time.time() - starttime))
+        print('[{:.8f}] boot: getting cnn headlines'.format(time.time() - starttime))
         urllib.request.urlretrieve('https://lite.cnn.io/en', 'cache')
+        n.write('[{:.8f}] boot: got cnn headlines\n'.format(time.time() - starttime))
         print('[{:.8f}] boot: loading cache headlines'.format(time.time() - starttime))
         q = open('cache', 'r')
         v = q.read().split('\">')
         q.close()
+        n.write('[{:.8f}] boot: got cache headlines\n'.format(time.time() - starttime))
         print('[{:.8f}] boot: completed, loading login'.format(time.time() - starttime))
     else:
         _internet = '{}No '.format(green)
         print('[{:.8f}] boot: internet connection failed'.format(time.time() - starttime))
+        n.write('[{:.8f}] boot: no internet connection\n'.format(time.time() - starttime))
         print('[{:.8f}] boot: completed, loading login'.format(time.time() - starttime))
     sys.stdout.write('\nPPPPP Y   Y OOOOO SSSSS 4   4\nP   P  Y Y  O   O S     4   4\nPPPPP   Y   O   O SSSSS 44444\nP       Y   O   O     S     4\nP       Y   OOOOO SSSSS     4\n\nDDD AAA N N K K   DDD OOO GGG\nD D A A NNN KK    D D O O GG\nDDD A A N N K K   DDD OOO GGG\n\n\n        login\n')
+    n.write('[{:.8f}] login: loaded logo\n'.format(time.time() - starttime))
+    n.write('[{:.8f}] login: waiting for usr input\n'.format(time.time() - starttime))
     _user = input('        usr: ')
+    n.write('[{:.8f}] login: got usr {}\n'.format(time.time() - starttime, _user))
+    n.write('[{:.8f}] login: waiting for pwd input\n'.format(time.time() - starttime))
     _pswd = getpass.getpass(prompt='        pwd: ')
+    n.write('[{:.8f}] login: got pwd\n'.format(time.time() - starttime))
     cmdlist = ['start', 'exit', 'rb', 'cd', 'md', 'ls', 'pd', 'cf', 'cl', 'help', 'cotw', 'scan', 'hash', 'cat', 'edit', 'news', 'time', 'weather', 'stocks', 'prompt', 'chusr', 'rbu', 'date', '#time', '#log', '#imp', '#emp', '#get', '#del', 'timer', 'stopwatch', 'rn', '#addusr']
     filedict = {}
     waiting = 0
@@ -91,21 +117,28 @@ try:
     varis = {}
     _path = ''
     paths = []
+    entered = 'start'
+    n.write('[{:.8f}] pysh: loaded shell data\n'.format(time.time() - starttime))
     tmp = subprocess.call(term, shell=True)
+    n.write('[{:.8f}] pysh: cleared screen\n'.format(time.time() - starttime))
     for j in data.split('&'):
         if j.split('/')[0] == _user:
             if j.split('/')[1] == hashlib.sha256(_pswd.encode()).hexdigest():
                 _path = _user + '/'
                 paths = [_user + '/']
+                n.write('[{:.8f}] login: verified user as {}\n'.format(time.time() - starttime, _user))
     if _path == '':
         _path = 'temp/'
         paths = ['temp/']
-    print('pyos 4.0.3.5 dank dog {}.74.94 09.03.19 @tri-llionaire with @dentafrice, @Akuhcap\nLogin at {}{} UTC\n{}{}Internet connection\n{}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(_build, red, datetime.datetime.now(), green, _internet, yellow, p[30][1:-1], white, blue, p[13], white, magenta, p[34][1:-1], white, cyan, p[44][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
-    sys.stdout.write('(pysh 1.3.3) ')
-    entered = 'start'
+        n.write('[{:.8f}] login: user set to temp\n'.format(time.time() - starttime))
+    print('pyos 4.1.0.2 dank dog {}.81.94 09.03.19 @tri-llionaire with @dentafrice, @Akuhcap\nLogin at {}{} UTC\n{}{}Internet connection\n{}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(_build, red, datetime.datetime.now(), green, _internet, yellow, p[30][1:-1], white, blue, p[13], white, magenta, p[34][1:-1], white, cyan, p[44][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
+    n.write('[{:.8f}] pysh: loaded prompt\n'.format(time.time() - starttime))
+    sys.stdout.write('(pysh 1.4.0) ')
+    n.write('[{:.8f}] pysh: ready for input\n'.format(time.time() - starttime))
     if entered == 'start':
         while entered != 'exit':
             entered = input('{}{} '.format(_path, addi))
+            n.write('[{:.8f}] input: {}\n'.format(time.time() - starttime, entered))
             entered = entered.split()
             for x in entered:
                 if x in cmdlist:
@@ -141,7 +174,7 @@ try:
                         elif x == 'hash':
                             hashing.thsh(hashing.h_char, '0')
                         elif x == 'help':
-                            print('help: show this\nexit: exit pyos\nrb: reboot main\nrbu: reboot and check for update\ncd $: change directory to $\nmd $: create directory $\nls: list contents of current directory\npd: print working directory\ncf $: create file $\ncat $: print contents of $\nedit $: edit file $\ncl: clear screen\ncotw($): start countriesoftheworld with optional parameters for settings\nscan($)($): start utf8scan6 with optional parameters for settings and hashes\nhash($): start hash converter with optional parameters for hashes\ntime: get current unix time\ndate: get current utc time\nweather: get current weather\nnews: get current news\nstocks: stocks game\nprompt $: set prompt to $\nchusr: change user\n$$ = $: set variable $ to $ (run with !$)\ntimer $: set a timer for $ seconds\nstopwatch: run a stopwatch\nrn $ $: rename $ to $\nbase: base converter')
+                            print('help: show this\nexit: exit pyos\nrb: reboot main\nrbu: reboot and check for update\ncd $: change directory to $\nmd $: create directory $\nls: list contents of current directory\npd: print working directory\ncf $: create file $\ncat $: print contents of $\nedit $: edit file $ (double enter to quit)\ncl: clear screen\ncotw($): start countriesoftheworld with optional parameters for settings\nscan($)($): start utf8scan6 with optional parameters for settings and hashes\nhash($): start hash converter with optional parameters for hashes\ntime: get current unix time\ndate: get current utc time\nweather: get current weather\nnews: get current news\nstocks: stocks game\nprompt $: set prompt to $\nchusr: change user\n$$ = $: set variable $ to $ (run with !$)\ntimer($): set a timer for $ seconds\nstopwatch: run a stopwatch\nrn $ $: rename $ to $\nbase($)($)($): base converter from $ to $ (with number $)')
                             if _user == 'root':
                                 print(':$: exec $\n#time: system runtime\n#log: view syslog\n#imp $: import file $ from base os\n#exp $: export file $ to base os\n#get $ $: save webpage $ as $\n#del $: delete file/directory $\n#addusr: add a user')
                         elif x == 'cl':
@@ -172,7 +205,7 @@ try:
                         elif x == 'stocks':
                             stock.stocks()
                         elif x == 'base':
-                            convert.base()
+                            convert.base('', '', '')
                         elif x == 'prompt':
                             waiting = 7
                         elif x == 'chusr':
@@ -202,7 +235,7 @@ try:
                                 print('pyos: pysh: permission denied')
                         elif x == '#get':
                             if _user == 'root':
-                                waiting = 14
+                                waiting = 13
                             else:
                                 print('pyos: pysh: permission denied')
                         elif x == '#time':
@@ -226,12 +259,12 @@ try:
                                 paths = [_user + '/']
                             else:
                                 print('pyos: pysh: permission denied')
-                        elif x == 'timer':
-                            waiting = 13
                         elif x == 'stopwatch':
                             clock.stopwatch()
                         elif x == 'rn':
-                            waiting = 16
+                            waiting = 15
+                        elif x == 'timer':
+                            clock.timer('')
                         else:
                             sys.exit()
                     else:
@@ -264,17 +297,23 @@ try:
                             print('pyos: pysh: {} not a valid file name'.format(x))
                         else:
                             paths.append(_path + x)
-                            filedict[x] = ''
+                            filedict[x] = []
                         waiting = 0
                     elif waiting == 4:
                         try:
-                            print(filedict[x])
+                            for i in filedict[x]:
+                                print(i)
                         except KeyError:
                             print('pyos: pysh: file {} doesn\'t exist'.format(x))
                         waiting = 0
                     elif waiting == 5:
-                        e = input(filedict[x])
-                        filedict[x] = filedict[x] + e
+                        filedict[x] = []
+                        while True:
+                            line = input()
+                            filedict[x].append(line)
+                            if line == '':
+                                break
+                        filedict[x] = filedict[x][:-1]
                         waiting = 0
                     elif waiting == 6:
                         try:
@@ -330,26 +369,26 @@ try:
                             print('pyos: pysh: error while getting {}'.format(l))
                         waiting = 0
                     elif waiting == 13:
-                        clock.timer(int(x))
-                        waiting = 0
-                    elif waiting == 14:
                         l = x
                         waiting = 12
-                    elif waiting == 15:
+                    elif waiting == 14:
                         if _path + previous in paths:
                             filedict[x] = filedict[previous]
                             del filedict[previous]
                         else:
                             print('pyos: pysh: file {} not found'.format(previous))
-                    elif waiting == 16:
+                    elif waiting == 15:
                         previous = x
-                        waiting = 15
+                        waiting = 14
                     elif x.startswith('scan'):
                         valid1 = ['3', '4', '5']
                         valid2 = ['1', '2']
                         valid3 = ['md5', 'sha1', 't-hash', 'sha256', 'sha384', 'sha512']
-                        if x[4] in valid1 and x[5:] in valid3:
-                            scan.scan(x[4], x[5:])
+                        if x[4] in valid1:
+                            if x[5:] in valid3:
+                                scan.scan(x[4], x[5:])
+                            else:
+                                scan.scan(x[4], '0')
                         elif x[4] in valid2:
                             scan.scan(x[4], '0')
                         else:
@@ -371,6 +410,29 @@ try:
                         t = x[1:]
                     elif x.startswith(':'):
                         exec(x[1:])
+                    elif x.startswith('timer'):
+                        try:
+                            if int(x[5]) > 0:
+                                clock.timer(int(x[5:]))
+                            else:
+                                clock.timer('')
+                        except:
+                            clock.timer('')
+                    elif x.startswith('base'):
+                        valid = ['d', 'h', 'o', 'b']
+                        try:
+                            if x[4] in valid:
+                                if x[5] in valid:
+                                    if len(x[6:]) > 0:
+                                        convert.base(x[4], x[5], int(x[6:]))
+                                    else:
+                                        convert.base(x[4], x[5], '')
+                                else:
+                                    convert.base(x[4], '', '')
+                            else:
+                                convert.base('', '', '')
+                        except:
+                            convert.base('', '', '')
                     else:
                         print('pyos: pysh: {} not found.'.format(x))
                         waiting = 0
