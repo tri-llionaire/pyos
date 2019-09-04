@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '074'
+_build = '081'
 try:
     import urllib.request, urllib.error, hashlib, random, sys, platform, time
     red = ''
@@ -75,10 +75,10 @@ try:
                 print('pyos: pysh: hash: invalid hash')
     class scan:
         def scan(s_ch, s_hs):
-            if s_ch == '0' and s_hs == '0':
+            if s_ch == '0':
                 s_ch = input('python utf8scan6.3.6\nchoose an option to convert:\n1: Non-condensed, non-hashed\n2: Condensed, non-hashed\n3: Non-condensed, hashed\n4: Condensed, hashed\n5: Super condensed, hashed\n')
-                if s_ch == '3' or s_ch == '4' or s_ch == '5':
-                    s_hs = input('t-hash, md5, sha1, sha256, sha384, or sha512? ')
+            if s_ch == '3' or s_ch == '4' or s_ch == '5' or s_hs == '0':
+                s_hs = input('t-hash, md5, sha1, sha256, sha384, or sha512? ')
             s_st = input('enter your string: ')
             s_r = len(s_st) + 3
             s_z = len(s_st) + 5
@@ -825,14 +825,19 @@ try:
             input()
             print(time.time() - started)
         def timer(seconds):
+            if seconds == '':
+                seconds = input('How many seconds? ')
             print('Starting')
             time.sleep(seconds)
             print('Done')
     class convert:
-        def base():
-            opt = input('from base (d)ec, (o)ct, (h)ex, or (b)in? ')
-            to = input('to base (d)ec, (o)ct, (h)ex, or (b)in? ')
-            number = input('enter the number: ')
+        def base(opt, to, number):
+            if opt == '':
+                opt = input('from base (d)ec, (o)ct, (h)ex, or (b)in? ')
+            if to == '':
+                to = input('to base (d)ec, (o)ct, (h)ex, or (b)in? ')
+            if number == '':
+                number = input('enter the number: ')
             if opt == 'd':
                 if to == 'h':
                     print(hex(int(number)))
@@ -853,11 +858,11 @@ try:
                     print(number)
             elif opt == 'h':
                 if to == 'd':
-                    print(int(number, 16))
+                    print(int(str(number), 16))
                 elif to == 'o':
-                    print(oct(int(number, 16)))
+                    print(oct(int(str(number), 16)))
                 elif to == 'b':
-                    print(bin(int(number, 16)))
+                    print(bin(int(str(number), 16)))
                 else:
                     print(number)
             elif opt == 'b':
