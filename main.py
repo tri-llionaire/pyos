@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '365'
+_build = '366'
 try:
     print('loading time')
     import time
@@ -67,7 +67,7 @@ try:
     import hashlib
     n.write('[{:.8f}] boot: hashlib loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading data'.format(time.time() - starttime))
-    y = open('data', 'r')
+    y = open('data', 'w+')
     data = y.read()
     y.close()
     n.write('[{:.8f}] boot: data loaded\n'.format(time.time() - starttime))
