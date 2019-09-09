@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '094'
+_build = '095'
 try:
     print('loading pre-log necessaries')
     import time, os
@@ -96,6 +96,24 @@ try:
             k = 'checking for updates'
             print(k)
             n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
+            l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/data'
+            urllib.request.urlretrieve(l, 'cache')
+            n.write('[{:.8f}] status: got url for data update\n'.format(time.time() - starttime))
+            r = open('cache', 'r')
+            words = r.read()
+            r.close()
+            n.write('[{:.8f}] status: successfully read cache\n'.format(time.time() - starttime))
+            try:
+                m = open('data', 'r')
+                m.close()
+                n.write('[{:.8f}] status: successfully read data\n'.format(time.time() - starttime))
+                print('data exists')
+            except OSError:
+                n.write('[{:.8f}] status: failed to read data, downloading\n'.format(time.time() - starttime))
+                urllib.request.urlretrieve(l, 'data')
+                k = 'data downloaded'
+                print(k)
+                n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
             l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/main.py'
             urllib.request.urlretrieve(l, 'cache')
             n.write('[{:.8f}] status: got url for main.py update\n'.format(time.time() - starttime))
