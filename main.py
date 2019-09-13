@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '378'
+_build = '380'
 try:
     print('loading time')
     import time
@@ -224,13 +224,13 @@ try:
                             y.close()
                             for j in data.split('&'):
                                 if j.split('/')[0] == _user:
-                                    if j.split('/')[1][:-1] == hashlib.sha256(_pswd.encode()).hexdigest():
+                                    if j.split('/')[1].replace('\n', '') == hashlib.sha256(_pswd.encode()).hexdigest():
                                         _path = _user + '/'
                                         paths = [_user + '/']
-                            if _path == '':
-                                print('incorrect login')
-                                _path = 'temp/'
-                                paths = ['temp/']
+                                else:
+                                    print('no match')
+                                    _path = 'temp/'
+                                    paths = ['temp/']
                         elif x == '#imp':
                             if _user == 'root':
                                 waiting = 10
