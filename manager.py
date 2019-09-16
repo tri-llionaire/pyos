@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '095'
+_build = '099'
 try:
     print('loading pre-log necessaries')
     import time, os
@@ -23,7 +23,7 @@ try:
     n.write('[{:.8f}] status: variables.check loaded\n'.format(time.time() - starttime))
     k = 'checking for internet'
     print(k)
-    n.write('[{:.8f}] manager: {}'.format(time.time() - starttime, k))
+    n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
     if check.check() is True:
         n.write('[{:.8f}] status: check.check() successful\n'.format(time.time() - starttime))
         k = '(w)eb update or (p)eertopeer update? '
@@ -93,6 +93,7 @@ try:
                 s.close()
                 n.write('[{:.8f}] socket: shutdown successfully\n'.format(time.time() - starttime))
         else:
+            n.write('[{:.8f}] input: {}\n'.format(time.time() - starttime, choice))
             k = 'checking for updates'
             print(k)
             n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
@@ -141,7 +142,7 @@ try:
             else:
                 k = 'main up to date (b{})'.format(other[34:37])
                 print(k)
-                n.write('[{:.8f}] manager: {}\n\n'.format(time.time() - starttime, k))
+                n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
             l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/variables.py'
             urllib.request.urlretrieve(l, 'cache')
             n.write('[{:.8f}] status: got url for variables.py update\n'.format(time.time() - starttime))
