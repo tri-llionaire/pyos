@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '380'
+_build = '384'
 try:
     print('loading time')
     import time
@@ -27,7 +27,7 @@ try:
         cyan = '\033[96m'
         white = '\033[0m'
         term = 'clear'
-    n.write('[{:.8f}] status: terminal commands loaded\n')
+    n.write('[{:.8f}] status: terminal commands loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: on {}{}{}{}{}'.format(time.time() - starttime, platform.system(), platform.release(), platform.version(), platform.machine(), platform.node()))
     n.write('[{:.8f}] boot: on {}{}{}{}{}\n'.format(time.time() - starttime, platform.system(), platform.release(), platform.version(), platform.machine(), platform.node()))
     print('[{:.8f}] boot: loading subprocess'.format(time.time() - starttime))
@@ -124,20 +124,17 @@ try:
     for j in data.split('&'):
         if j.split('/')[0] == _user:
             if j.split('/')[1].replace('\n', '') == hashlib.sha256(_pswd.encode()).hexdigest():
-                if _user == 'root':
-                    _path = 'root/'
-                    paths = ['root/']
-                else:
-                    _path = _user + '/'
-                    paths = [_user + '/']
+                _path = 'root/'
+                paths = ['root/']
                 n.write('[{:.8f}] login: verified user as {}\n'.format(time.time() - starttime, _user))
+                break
         else:
             _path = 'temp/'
             paths = ['temp/']
-        n.write('[{:.8f}] login: user set to temp\n'.format(time.time() - starttime))
-    print('pyos 4.1.0.5 dank dog {}.81.95 09.09.19 @tri-llionaire with @dentafrice, @Akuhcap\nLogin at {}{} UTC\n{}{}Internet connection\n{}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(_build, red, datetime.datetime.now(), green, _internet, yellow, p[30][1:-1], white, blue, p[13], white, magenta, p[34][1:-1], white, cyan, p[44][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
+        n.write('[{:.8f}] login: user set to {}\n'.format(time.time() - starttime, _user))
+    print('pyos 4.1.0.5 dank dog {}.81.99 09.09.19 @tri-llionaire with @dentafrice, @Akuhcap\nLogin at {}{} UTC\n{}{}Internet connection\n{}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(_build, red, datetime.datetime.now(), green, _internet, yellow, p[30][1:-1], white, blue, p[13], white, magenta, p[34][1:-1], white, cyan, p[44][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
     n.write('[{:.8f}] pysh: loaded prompt\n'.format(time.time() - starttime))
-    sys.stdout.write('(pysh 1.4.0) ')
+    sys.stdout.write('(pysh 1.4.1) ')
     n.write('[{:.8f}] pysh: ready for input\n'.format(time.time() - starttime))
     if entered == 'start':
         while entered != 'exit':
@@ -227,8 +224,8 @@ try:
                                     if j.split('/')[1].replace('\n', '') == hashlib.sha256(_pswd.encode()).hexdigest():
                                         _path = _user + '/'
                                         paths = [_user + '/']
+                                        break
                                 else:
-                                    print('no match')
                                     _path = 'temp/'
                                     paths = ['temp/']
                         elif x == '#imp':
