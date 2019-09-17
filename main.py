@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '384'
+_build = '387'
 try:
     print('loading time')
     import time
@@ -73,7 +73,7 @@ try:
     n.write('[{:.8f}] boot: data loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: checking internet connection'.format(time.time() - starttime))
     if check.check() is True:
-        _internet = ''
+        _internet = '{}'.format(red)
         print('[{:.8f}] boot: internet connection succeeded'.format(time.time() - starttime))
         n.write('[{:.8f}] boot: internet connection\n'.format(time.time() - starttime))
         print('[{:.8f}] boot: loading urllib'.format(time.time() - starttime))
@@ -97,7 +97,7 @@ try:
         n.write('[{:.8f}] boot: got cache headlines\n'.format(time.time() - starttime))
         print('[{:.8f}] boot: completed, loading login'.format(time.time() - starttime))
     else:
-        _internet = '{}No '.format(green)
+        _internet = '{}No '.format(red)
         print('[{:.8f}] boot: internet connection failed'.format(time.time() - starttime))
         n.write('[{:.8f}] boot: no internet connection\n'.format(time.time() - starttime))
         print('[{:.8f}] boot: completed, loading login'.format(time.time() - starttime))
@@ -109,7 +109,7 @@ try:
     n.write('[{:.8f}] login: waiting for pwd input\n'.format(time.time() - starttime))
     _pswd = getpass.getpass(prompt='        pwd: ')
     n.write('[{:.8f}] login: got pwd\n'.format(time.time() - starttime))
-    cmdlist = ['start', 'exit', 'rb', 'cd', 'md', 'ls', 'pd', 'cf', 'cl', 'help', 'cotw', 'scan', 'hash', 'cat', 'edit', 'news', 'time', 'weather', 'stocks', 'prompt', 'chusr', 'rbu', 'date', '#time', '#log', '#imp', '#emp', '#get', '#del', 'timer', 'stopwatch', 'rn', '#addusr']
+    cmdlist = ['start', 'exit', 'rb', 'cd', 'md', 'ls', 'pd', 'cf', 'cl', 'help', 'cotw', 'scan', 'hash', 'cat', 'edit', 'news', 'time', 'weather', 'stocks', 'prompt', 'chusr', 'rbu', 'date', '#time', '#log', '#imp', '#emp', '#get', '#del', 'timer', 'stopwatch', 'rn', '#addusr', '#reset', 'python', '#data']
     filedict = {}
     waiting = 0
     addi = ''
@@ -132,9 +132,9 @@ try:
             _path = 'temp/'
             paths = ['temp/']
         n.write('[{:.8f}] login: user set to {}\n'.format(time.time() - starttime, _user))
-    print('pyos 4.1.0.5 dank dog {}.81.99 09.09.19 @tri-llionaire with @dentafrice, @Akuhcap\nLogin at {}{} UTC\n{}{}Internet connection\n{}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(_build, red, datetime.datetime.now(), green, _internet, yellow, p[30][1:-1], white, blue, p[13], white, magenta, p[34][1:-1], white, cyan, p[44][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
+    print('pyos 4.1.2.0 dank dog {}.84.100 09.17.19 @tri-llionaire with @dentafrice, @Akuhcap\nLogin at {}{} UTC\n{}Internet connection\n{}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(_build, red, datetime.datetime.now(), _internet, yellow, p[30][1:-1], white, blue, p[13], white, magenta, p[34][1:-1], white, cyan, p[44][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
     n.write('[{:.8f}] pysh: loaded prompt\n'.format(time.time() - starttime))
-    sys.stdout.write('(pysh 1.4.1) ')
+    sys.stdout.write('(pysh 1.4.2) ')
     n.write('[{:.8f}] pysh: ready for input\n'.format(time.time() - starttime))
     if entered == 'start':
         while entered != 'exit':
@@ -179,9 +179,9 @@ try:
                         elif x == 'hash':
                             hashing.thsh(hashing.h_char, '0')
                         elif x == 'help':
-                            print('help: show this\nexit: exit pyos\nrb: reboot main\nrbu: reboot and check for update\ncd $: change directory to $\nmd $: create directory $\nls: list contents of current directory\npd: print working directory\ncf $: create file $\ncat $: print contents of $\nedit $: edit file $ (double enter to quit)\ncl: clear screen\ncotw($): start countriesoftheworld with optional parameters for settings\nscan($)($): start utf8scan6 with optional parameters for settings and hashes\nhash($): start hash converter with optional parameters for hashes\ntime: get current unix time\ndate: get current utc time\nweather: get current weather\nnews: get current news\nstocks: stocks game\nprompt $: set prompt to $\nchusr: change user\n$$ = $: set variable $ to $ (run with !$)\ntimer($): set a timer for $ seconds\nstopwatch: run a stopwatch\nrn $ $: rename $ to $\nbase($)($)($): base converter from $ to $ (with number $)')
+                            print('help: show this\nexit: exit pyos\nrb: reboot main\nrbu: reboot and check for update\ncd $: change directory to $\nmd $: create directory $\nls: list contents of current directory\npd: print working directory\ncf $: create file $\ncat $: print contents of $\nedit $: edit file $ (double enter to quit)\ncl: clear screen\ncotw($): start countriesoftheworld with optional parameters for settings\nscan($)($): start utf8scan6 with optional parameters for settings and hashes\nhash($): start hash converter with optional parameters for hashes\ntime: get current unix time\ndate: get current utc time\nweather: get current weather\nnews: get current news\nstocks: stocks game\nprompt $: set prompt to $\nchusr: change user\n$$ = $: set variable $ to $ (run with !$)\ntimer($): set a timer for $ seconds\nstopwatch: run a stopwatch\nrn $ $: rename $ to $\nbase($)($)($): base converter from $ to $ (with number $)\npython: python3 interpreter')
                             if _user == 'root':
-                                print(':$: exec $\n#time: system runtime\n#log: view syslog\n#imp $: import file $ from base os\n#exp $: export file $ to base os\n#get $ $: save webpage $ as $\n#del $: delete file/directory $\n#addusr: add a user')
+                                print(':$: exec $\n#time: system runtime\n#log: view syslog\n#imp $: import file $ from base os\n#exp $: export file $ to base os\n#get $ $: save webpage $ as $\n#del $: delete file/directory $\n#addusr: add a user\n#data: view data\n#reset: reset data')
                         elif x == 'cl':
                             tmp = subprocess.call(term, shell=True)
                         elif x == 'rb':
@@ -270,6 +270,28 @@ try:
                             waiting = 15
                         elif x == 'timer':
                             clock.timer('')
+                        elif x == 'python':
+                            print('python3.7.4 (double enter to exec):')
+                            full = []
+                            while True:
+                                line = input()
+                                if line == '':
+                                    break
+                                full.append(line)
+                            d = '\n'.join(full)
+                            print('output:')
+                            exec(d)
+                        elif x == '#data':
+                            if _user == 'root':
+                                print(open('data', 'r').read())
+                            else:
+                                print('pyos: pysh: permission denied')
+                        elif x == '#reset':
+                            if _user == 'root':
+                                with open('data', 'w') as y:
+                                    y.write('root/4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2')
+                            else:
+                                print('pyos: pysh: permission denied')
                         else:
                             sys.exit()
                     else:
