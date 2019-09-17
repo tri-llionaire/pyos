@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '099'
+_build = '100'
 try:
     print('loading pre-log necessaries')
     import time, os
@@ -183,6 +183,7 @@ try:
                 k = 'manager updated from b{} to b{}'.format(_build, words[34:37])
                 print(k)
                 n.write('[{:.8f}] manager: {}; restarting\n'.format(time.time() - starttime, k))
+                print('restarting manager')
                 exec(open('manager.py', 'r').read())
             elif int(words[34:37]) < int(_build):
                 k = 'update github for manager (b{} to b{})'.format(words[34:37], _build)
