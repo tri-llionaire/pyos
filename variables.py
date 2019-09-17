@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '081'
+_build = '084'
 try:
     import urllib.request, urllib.error, hashlib, random, sys, platform, time
     red = ''
@@ -44,7 +44,7 @@ try:
                     pass
             else:
                 t_s = input('enter string: ')
-                hashing.otherhash(t_which, t_s)
+                print(hashing.otherhash(t_which, t_s))
         def itsh(i_s, i_key, i_char):
             i_n = ''
             if 2 <= i_key <= 100:
@@ -62,17 +62,17 @@ try:
                 print('pyos: pysh: scan: t-hash: invalid key')
         def otherhash(s_hs, s_st):
             if s_hs == 'md5':
-                s_st = hashlib.md5(s_st.encode()).hexdigest()
+                return hashlib.md5(s_st.encode()).hexdigest()
             elif s_hs == 'sha1':
-                s_st = hashlib.sha1(s_st.encode()).hexdigest()
+                return hashlib.sha1(s_st.encode()).hexdigest()
             elif s_hs == 'sha256':
-                s_st = hashlib.sha256(s_st.encode()).hexdigest()
+                return hashlib.sha256(s_st.encode()).hexdigest()
             elif s_hs == 'sha384':
-                s_st = hashlib.sha384(s_st.encode()).hexdigest()
+                return hashlib.sha384(s_st.encode()).hexdigest()
             elif s_hs == 'sha512':
-                s_st = hashlib.sha512(s_st.encode()).hexdigest()
+                return hashlib.sha512(s_st.encode()).hexdigest()
             else:
-                print('pyos: pysh: hash: invalid hash')
+                return 'pyos: pysh: hash: invalid hash'
     class scan:
         def scan(s_ch, s_hs):
             if s_ch == '0':
@@ -682,7 +682,7 @@ try:
                 return '{0:.2f}'.format(100.00 / float(c_total) * float(c_right))
             if c_choose == '0':
                 c_choose = input('Answer with the countries or capitals? (1 or 2): ')
-            elif c_choose == '2':
+            if c_choose == '2':
                 while c_ans.lower() != 'end':
                     c_n = random.randint(0, 196)
                     print('\nWhat is the capital of the country {}{}{}?\n'.format(blue, c_get_key(c_answers.get(c_countries[c_n])), white))
