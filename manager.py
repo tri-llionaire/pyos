@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '100'
+_build = '103'
 try:
     print('loading pre-log necessaries')
     import time, os
@@ -26,6 +26,13 @@ try:
     n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
     if check.check() is True:
         n.write('[{:.8f}] status: check.check() successful\n'.format(time.time() - starttime))
+        k = '(m)aster or (b)eta? '
+        a = input(k)
+        n.write('[{:.8f}] query: {}\n'.format(time.time() - starttime, k))
+        if a == 'b':
+            b = 'beta'
+        else:
+            b = 'master'
         k = '(w)eb update or (p)eertopeer update? '
         choice = input(k)
         n.write('[{:.8f}] query: {}\n'.format(time.time() - starttime, k))
@@ -94,12 +101,40 @@ try:
                 n.write('[{:.8f}] socket: shutdown successfully\n'.format(time.time() - starttime))
         else:
             n.write('[{:.8f}] input: {}\n'.format(time.time() - starttime, choice))
+            k = '(d)ownload or (n)o download todo, readme, and license? '
+            get = input(k)
+            n.write('[{:.8f}] query: {}\n'.format(time.time() - starttime, k))
+            if get == 'd':
+                l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/{}/README.txt'.format(b)
+                urllib.request.urlretrieve(l, 'cache')
+                n.write('[{:.8f}] status: got url for readme\n'.format(time.time() - starttime))
+                urllib.request.urlretrieve(l, 'README.txt')
+                k = 'got README'
+                print(k)
+                n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
+                l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/{}/LICENSE'.format(b)
+                urllib.request.urlretrieve(l, 'cache')
+                n.write('[{:.8f}] status: got url for license\n'.format(time.time() - starttime))
+                urllib.request.urlretrieve(l, 'LICENSE')
+                k = 'got LICENSE'
+                print(k)
+                n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
+                l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/{}/todo.txt'.format(b)
+                urllib.request.urlretrieve(l, 'cache')
+                n.write('[{:.8f}] status: got url for todo\n'.format(time.time() - starttime))
+                urllib.request.urlretrieve(l, 'todo.txt')
+                k = 'got todo.txt'
+                print(k)
+            else:
+                k = 'skipped downloads'
+                print(k)
+                n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
             k = 'checking for updates'
             print(k)
             n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
-            l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/data'
+            l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/{}/data'.format(b)
             urllib.request.urlretrieve(l, 'cache')
-            n.write('[{:.8f}] status: got url for data update\n'.format(time.time() - starttime))
+            n.write('[{:.8f}] status: got url for data check\n'.format(time.time() - starttime))
             r = open('cache', 'r')
             words = r.read()
             r.close()
@@ -115,7 +150,7 @@ try:
                 k = 'data downloaded'
                 print(k)
                 n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
-            l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/main.py'
+            l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/{}/main.py'.format(b)
             urllib.request.urlretrieve(l, 'cache')
             n.write('[{:.8f}] status: got url for main.py update\n'.format(time.time() - starttime))
             r = open('cache', 'r')
@@ -143,7 +178,7 @@ try:
                 k = 'main up to date (b{})'.format(other[34:37])
                 print(k)
                 n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
-            l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/variables.py'
+            l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/{}/variables.py'.format(b)
             urllib.request.urlretrieve(l, 'cache')
             n.write('[{:.8f}] status: got url for variables.py update\n'.format(time.time() - starttime))
             r = open('cache', 'r')
@@ -171,7 +206,7 @@ try:
                 k = 'variables up to date (b{})'.format(other[34:37])
                 print(k)
                 n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
-            l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/master/manager.py'
+            l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/{}/manager.py'.format(b)
             urllib.request.urlretrieve(l, 'cache')
             n.write('[{:.8f}] status: got url for manager.py update\n'.format(time.time() - starttime))
             r = open('cache', 'r')
