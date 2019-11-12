@@ -13,3 +13,4 @@ fix n.write and print messages in boot
 fix lack of slashes in wd in root
 add support for cd ../..
 ls shows directories past one tier
+test p2p
