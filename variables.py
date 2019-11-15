@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-_build = '084'
+_build = '090'
 try:
     import urllib.request, urllib.error, hashlib, random, sys, platform, time
     red = ''
@@ -59,7 +59,7 @@ try:
                         i_n = i_char[' '] + i_n
                 return hex(int(int(i_n)/i_key))[2:-1]
             else:
-                print('pyos: pysh: scan: t-hash: invalid key')
+                print('t-hash: invalid key')
         def otherhash(s_hs, s_st):
             if s_hs == 'md5':
                 return hashlib.md5(s_st.encode()).hexdigest()
@@ -72,11 +72,11 @@ try:
             elif s_hs == 'sha512':
                 return hashlib.sha512(s_st.encode()).hexdigest()
             else:
-                return 'pyos: pysh: hash: invalid hash'
+                return 'invalid hash'
     class scan:
         def scan(s_ch, s_hs):
             if s_ch == '0':
-                s_ch = input('python utf8scan6.3.6\nchoose an option to convert:\n1: Non-condensed, non-hashed\n2: Condensed, non-hashed\n3: Non-condensed, hashed\n4: Condensed, hashed\n5: Super condensed, hashed\n')
+                s_ch = input('python utf8scan6.3.8\nchoose an option to convert:\n1: Non-condensed, non-hashed\n2: Condensed, non-hashed\n3: Non-condensed, hashed\n4: Condensed, hashed\n5: Super condensed, hashed\n')
             if s_ch == '3' or s_ch == '4' or s_ch == '5' or s_hs == '0':
                 s_hs = input('t-hash, md5, sha1, sha256, sha384, or sha512? ')
             s_st = input('enter your string: ')
@@ -208,7 +208,7 @@ try:
                     s_x += 1
                 s_output_opt(s_x, s_r, s_hs)
             else:
-                print('pyos: pysh: scan: unknown option')
+                print('unknown option')
     class cotw:
         c_countries = [
             'Afghanistan',
@@ -669,7 +669,7 @@ try:
             c_wrong = 0
             c_total = c_right + c_wrong
             c_ans = 'x'
-            print('the cia world factbook 2019\ncountriesoftheworld 1.6.8.41\n\'end\' to end the program\n')
+            print('the cia world factbook 2019\ncountriesoftheworld 1.6.8-44\n\'end\' to end the program\n')
             def c_get_key(c_val):
                 for c_key, c_value in list(c_answers.items()):
                     if c_val == c_value:
@@ -681,11 +681,11 @@ try:
             def c_perc(c_right, c_wrong):
                 return '{0:.2f}'.format(100.00 / float(c_total) * float(c_right))
             if c_choose == '0':
-                c_choose = input('Answer with the countries or capitals? (1 or 2): ')
+                c_choose = input('answer with the countries or capitals? (1 or 2): ')
             if c_choose == '2':
                 while c_ans.lower() != 'end':
                     c_n = random.randint(0, 196)
-                    print('\nWhat is the capital of the country {}{}{}?\n'.format(blue, c_get_key(c_answers.get(c_countries[c_n])), white))
+                    print('\nwhat is the capital of the country {}{}{}?\n'.format(blue, c_get_key(c_answers.get(c_countries[c_n])), white))
                     c_ans = input()
                     if c_ans.lower() == 'end':
                         pass
@@ -704,7 +704,7 @@ try:
             elif c_choose == '1':
                 while c_ans.lower() != 'end':
                     c_n = random.randint(0, 196)
-                    print('\nWhich country has the capital {}{}{}?\n'.format(blue, c_answers.get(c_countries[c_n]), white))
+                    print('\nwhich country has the capital {}{}{}?\n'.format(blue, c_answers.get(c_countries[c_n]), white))
                     c_ans = input()
                     if c_ans.lower() == 'end':
                         pass
@@ -721,12 +721,12 @@ try:
                         print(c_c_w_w(c_right, c_total))
                         print('{}{}'.format(blue, str(c_perc(c_right, c_wrong))) + '%{}\n'.format(white))
             else:
-                print('Um')
+                print('um')
                 pass
     class stock:
         def stocks():
             money = 50
-            print('(3.6.2) Welcome to Python Stock Central!\nHow much money can you make in 10 days?\n\'end\' to quit')
+            print('(3.6.3) how much money can you make in 10 turns\n\'end\' to quit')
             yours = []
             stocks = {
                 'Microsoft': 20,
@@ -780,29 +780,29 @@ try:
                             y = '{}['.format(red) + str(stocks[i] - old_stocks[i]) + ']'
                         if i in yours:
                             if h == 3:
-                                sys.stdout.write('\n{} {}{}: {} (OWNED)'.format(y, white, i, stocks.get(i)) + ' ' * (35 - len('{} {}{}: {} (OWNED)'.format(y, white, i, stocks.get(i)))))
+                                sys.stdout.write('\n{} {}{}: {} (OWNED)'.format(y, white, i, stocks.get(i)) + ' ' * (27 - len('{} {}{}: {} (OWNED)'.format(y, white, i, stocks.get(i)) + y)))
                                 h = 1
                             else:
-                                sys.stdout.write('{} {}{}: {} (OWNED)'.format(y, white, i, stocks.get(i)) + ' ' * (35 - len('{} {}{}: {} (OWNED)'.format(y, white, i, stocks.get(i)))))
+                                sys.stdout.write('{} {}{}: {} (OWNED)'.format(y, white, i, stocks.get(i)) + ' ' * (27 - len('{} {}{}: {} (OWNED)'.format(y, white, i, stocks.get(i)) + y)))
                                 money += stocks[i] - old_stocks[i]
                                 h += 1
                         else:
                             if h == 3:
-                                sys.stdout.write('\n{} {}{}: {}'.format(y, white, i, stocks.get(i)) + ' ' * (35 - len('{} {}[0m{}: {}'.format(y, white, i, stocks.get(i)))))
+                                sys.stdout.write('\n{} {}{}: {}'.format(y, white, i, stocks.get(i)) + ' ' * (35 - len('{} {}[0m{}: {}'.format(y, white, i, stocks.get(i)) + y)))
                                 h = 1
                             else:
-                                sys.stdout.write('{} {}{}: {}'.format(y, white, i, stocks.get(i)) + ' ' * (35 - len('{} {}{}: {}'.format(y, white, i, stocks.get(i)))))
+                                sys.stdout.write('{} {}{}: {}'.format(y, white, i, stocks.get(i)) + ' ' * (35 - len('{} {}{}: {}'.format(y, white, i, stocks.get(i)) + y)))
                                 h += 1
                 if x > 1:
-                    print('\nYou made ${} yesterday.'.format(str(money - moneyx)))
+                    print('\nyou made ${} yesterday'.format(str(money - moneyx)))
                 else:
                     pass
                 if x == 11:
                     pass
                 else:
-                    print('\nYou have ${} before purchases.'.format(money))
-                    which = input('What would you like to invest in? ').split()
-                    if which == 'end':
+                    print('\nyou have ${} before purchases'.format(money))
+                    which = input('what would you like to invest in? ').split()
+                    if which == ['end']:
                         break
                     for i in which:
                         if i in stocks:
@@ -811,25 +811,25 @@ try:
                                     yours.append(i)
                                     money -= stocks.get(i)
                                 else:
-                                    print('Not enough money!')
+                                    print('not enough money')
                             else:
-                                print('Already owned.')
+                                print('already owned')
                         else:
-                            print('Error')
-                print('You have ${} after purchases.\n'.format(money))
+                            print('error')
+                print('you have ${} after purchases\n'.format(money))
                 x += 1
     class clock:
         def stopwatch():
-            input('Hit enter to start/stop')
+            input('hit enter to start/stop')
             started = time.time()
             input()
             print(time.time() - started)
         def timer(seconds):
             if seconds == '':
-                seconds = input('How many seconds? ')
-            print('Starting')
+                seconds = input('how many seconds? ')
+            print('starting')
             time.sleep(seconds)
-            print('Done')
+            print('done')
     class convert:
         def base(opt, to, number):
             if opt == '':
@@ -877,5 +877,6 @@ try:
             else:
                 print('error')
 except Exception as err:
-    print(type, err)
-    pass
+    exc_type, exc_obj, exc_tb = sys.exc_info()
+    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+    print(exc_type, fname, exc_tb.tb_lineno)

@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-_build = '103'
+_build = '106'
 try:
     print('loading pre-log necessaries')
     import time, os
     starttime = time.time()
-    try:
-        os.remove('log')
-    except:
-        pass
+    print('loading os')
+    import os
+    print('loading sys')
+    import sys
+    with open('log', 'w') as n:
+        n.write('')
     n = open('log', 'a+')
     n.write('started manager log\n')
     k = 'loading modules'
@@ -135,10 +137,6 @@ try:
             l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/{}/data'.format(b)
             urllib.request.urlretrieve(l, 'cache')
             n.write('[{:.8f}] status: got url for data check\n'.format(time.time() - starttime))
-            r = open('cache', 'r')
-            words = r.read()
-            r.close()
-            n.write('[{:.8f}] status: successfully read cache\n'.format(time.time() - starttime))
             try:
                 m = open('data', 'r')
                 m.close()
@@ -154,84 +152,84 @@ try:
             urllib.request.urlretrieve(l, 'cache')
             n.write('[{:.8f}] status: got url for main.py update\n'.format(time.time() - starttime))
             r = open('cache', 'r')
-            words = r.read()
+            w = r.read()[34:37]
             r.close()
             n.write('[{:.8f}] status: successfully read cache\n'.format(time.time() - starttime))
             try:
                 m = open('main.py', 'r')
-                other = m.read()
+                o = m.read()[34:37]
                 m.close()
                 n.write('[{:.8f}] status: successfully read main.py\n'.format(time.time() - starttime))
             except OSError:
-                other[34:37] = '000'
+                o = '000'
                 n.write('[{:.8f}] status: failed to read main.py, setting _build to 000\n'.format(time.time() - starttime))
-            if int(words[34:37]) > int(other[34:37]):
+            if int(w) > int(o):
                 urllib.request.urlretrieve(l, 'main.py')
-                k = 'main updated from b{} to b{}'.format(other[34:37], words[34:37])
+                k = 'main updated from b{} to b{}'.format(o, w)
                 print(k)
                 n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
-            elif int(words[34:37]) < int(other[34:37]):
-                k = 'update github for main (b{} to b{})'.format(words[34:37], other[34:37])
+            elif int(w) < int(o):
+                k = 'update github for main (b{} to b{})'.format(w, o)
                 print(k)
                 n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
             else:
-                k = 'main up to date (b{})'.format(other[34:37])
+                k = 'main up to date (b{})'.format(o)
                 print(k)
                 n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
             l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/{}/variables.py'.format(b)
             urllib.request.urlretrieve(l, 'cache')
             n.write('[{:.8f}] status: got url for variables.py update\n'.format(time.time() - starttime))
             r = open('cache', 'r')
-            words = r.read()
+            w = r.read()[34:37]
             r.close()
             n.write('[{:.8f}] status: successfully read cache\n'.format(time.time() - starttime))
             try:
                 m = open('variables.py', 'r')
-                other = m.read()
+                o = m.read()[34:37]
                 m.close()
                 n.write('[{:.8f}] status: successfully read variables.py\n'.format(time.time() - starttime))
             except OSError:
-                other[34:37] = '000'
+                o = '000'
                 n.write('[{:.8f}] status: failed to read variables.py, setting _build to 000\n'.format(time.time() - starttime))
-            if int(words[34:37]) > int(other[34:37]):
+            if int(w) > int(o):
                 urllib.request.urlretrieve(l, 'variables.py')
-                k = 'variables updated from b{} to b{}'.format(other[34:37], words[34:37])
+                k = 'variables updated from b{} to b{}'.format(o, w)
                 print(k)
                 n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
-            elif int(words[34:37]) < int(other[34:37]):
-                k = 'update github for variables (b{} to b{})'.format(words[34:37], other[34:37])
+            elif int(w) < int(o):
+                k = 'update github for variables (b{} to b{})'.format(w, o)
                 print(k)
                 n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
             else:
-                k = 'variables up to date (b{})'.format(other[34:37])
+                k = 'variables up to date (b{})'.format(o)
                 print(k)
                 n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
             l = 'https://raw.githubusercontent.com/tri-llionaire/pyos/{}/manager.py'.format(b)
             urllib.request.urlretrieve(l, 'cache')
             n.write('[{:.8f}] status: got url for manager.py update\n'.format(time.time() - starttime))
             r = open('cache', 'r')
-            words = r.read()
+            w = r.read()[34:37]
             r.close()
             n.write('[{:.8f}] status: successfully read manager.py\n'.format(time.time() - starttime))
-            if int(words[34:37]) > int(_build):
+            if int(w) > int(_build):
                 urllib.request.urlretrieve(l, 'manager.py')
-                k = 'manager updated from b{} to b{}'.format(_build, words[34:37])
+                k = 'manager updated from b{} to b{}'.format(_build, w)
                 print(k)
                 n.write('[{:.8f}] manager: {}; restarting\n'.format(time.time() - starttime, k))
                 print('restarting manager')
                 exec(open('manager.py', 'r').read())
-            elif int(words[34:37]) < int(_build):
-                k = 'update github for manager (b{} to b{})'.format(words[34:37], _build)
+            elif int(w) < int(_build):
+                k = 'update github for manager (b{} to b{})'.format(w, _build)
                 print(k)
                 n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
             else:
                 k = 'manager up to date (b{})'.format(_build)
                 print(k)
                 n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
-            k = 'Total runtime: {:.8f}'.format(time.time() - starttime)
+            k = 'total runtime: {:.8f}'.format(time.time() - starttime)
             print(k)
             n.write('[{:.8f}] manager: {}\n'.format(time.time() - starttime, k))
-        input('Enter to boot pyos')
+        input('enter to boot pyos')
     else:
         k = 'no internet'
         print(k)
@@ -245,4 +243,6 @@ try:
     n.close()
     exec(open('main.py', 'r').read())
 except Exception as err:
-    print(type, err)
+    exc_type, exc_obj, exc_tb = sys.exc_info()
+    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+    print(exc_type, fname, exc_tb.tb_lineno)
