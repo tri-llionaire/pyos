@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-_build = '387'
+_build = '393'
+_versionpyos = '4.2.0.0'
+_varbuild = '90'
+_manbuild = '106'
+_date = '11.15.19'
+_title = 'dank dog'
 try:
     print('loading time')
     import time
@@ -36,6 +41,9 @@ try:
     print('[{:.8f}] boot: loading sys'.format(time.time() - starttime))
     import sys
     n.write('[{:.8f}] boot: sys loaded\n'.format(time.time() - starttime))
+    print('[{:.8f}] boot: loading os'.format(time.time() - starttime))
+    import os
+    n.write('[{:.8f}] boot: os loaded\n'.format(time.time() - starttime))
     print('[{:.8f}] boot: loading internetcheck'.format(time.time() - starttime))
     from variables import check
     n.write('[{:.8f}] boot: variables.check loaded\n'.format(time.time() - starttime))
@@ -115,8 +123,8 @@ try:
     addi = ''
     added = []
     varis = {}
-    _path = ''
-    paths = []
+    _path = 'temp/'
+    paths = ['temp/']
     entered = 'start'
     n.write('[{:.8f}] pysh: loaded shell data\n'.format(time.time() - starttime))
     tmp = subprocess.call(term, shell=True)
@@ -124,15 +132,12 @@ try:
     for j in data.split('&'):
         if j.split('/')[0] == _user:
             if j.split('/')[1].replace('\n', '') == hashlib.sha256(_pswd.encode()).hexdigest():
-                _path = 'root/'
-                paths = ['root/']
+                _path = _user + '/'
+                paths = [_user + '/']
                 n.write('[{:.8f}] login: verified user as {}\n'.format(time.time() - starttime, _user))
                 break
-        else:
-            _path = 'temp/'
-            paths = ['temp/']
         n.write('[{:.8f}] login: user set to {}\n'.format(time.time() - starttime, _user))
-    print('pyos 4.1.2.0 dank dog {}.84.100 09.17.19 @tri-llionaire with @dentafrice, @Akuhcap\nLogin at {}{} UTC\n{}Internet connection\n{}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(_build, red, datetime.datetime.now(), _internet, yellow, p[30][1:-1], white, blue, p[13], white, magenta, p[34][1:-1], white, cyan, p[44][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
+    print('pyos {} {} {}.{}.{} {} @tri-llionaire with @dentafrice, @Akuhcap\nLogin at {}{} UTC\n{}Internet connection\n{}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(_versionpyos, _title, _build, _varbuild, _manbuild, _date, red, datetime.datetime.now(), _internet, yellow, p[30][1:-1], white, blue, p[13], white, magenta, p[34][1:-1], white, cyan, p[44][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
     n.write('[{:.8f}] pysh: loaded prompt\n'.format(time.time() - starttime))
     sys.stdout.write('(pysh 1.4.2) ')
     n.write('[{:.8f}] pysh: ready for input\n'.format(time.time() - starttime))
@@ -169,7 +174,7 @@ try:
                             if _user == 'root':
                                 waiting = 6
                             else:
-                                print('pyos: pysh: permission denied')
+                                print('permission denied')
                         elif x == 'start':
                             print('already in pysh')
                         elif x == 'cotw':
@@ -214,56 +219,56 @@ try:
                         elif x == 'prompt':
                             waiting = 7
                         elif x == 'chusr':
-                            _user = input('usr: ')
-                            _pswd = getpass.getpass(prompt='pwd: ')
+                            t_user = input('usr: ')
+                            t_pswd = getpass.getpass(prompt='pwd: ')
                             y = open('data', 'r')
                             data = y.read()
                             y.close()
                             for j in data.split('&'):
-                                if j.split('/')[0] == _user:
-                                    if j.split('/')[1].replace('\n', '') == hashlib.sha256(_pswd.encode()).hexdigest():
-                                        _path = _user + '/'
-                                        paths = [_user + '/']
+                                if j.split('/')[0] == t_user:
+                                    if j.split('/')[1].replace('\n', '') == hashlib.sha256(t_pswd.encode()).hexdigest():
+                                        _path = t_user + '/'
+                                        paths = [t_user + '/']
+                                        print('set usr/pswd to {}/{}'.format(t_user, t_pswd))
+                                        _user = t_user
+                                        _pswd = t_pswd
                                         break
-                                else:
-                                    _path = 'temp/'
-                                    paths = ['temp/']
                         elif x == '#imp':
                             if _user == 'root':
                                 waiting = 10
                             else:
-                                print('pyos: pysh: permission denied')
+                                print('permission denied')
                         elif x == '#exp':
                             if _user == 'root':
                                 waiting = 11
                             else:
-                                print('pyos: pysh: permission denied')
+                                print('permission denied')
                         elif x == '#get':
                             if _user == 'root':
                                 waiting = 13
                             else:
-                                print('pyos: pysh: permission denied')
+                                print('permission denied')
                         elif x == '#time':
                             if _user == 'root':
                                 print(time.time() - starttime)
                             else:
-                                print('pyos: pysh: permission denied')
+                                print('permission denied')
                         elif x == '#log':
                             if _user == 'root':
                                 print(open('log', 'r').read())
                             else:
-                                print('pyos: pysh: permission denied')
+                                print('permission denied')
                         elif x == '#addusr':
                             if _user == 'root':
                                 _user = input('usr: ')
                                 _pswd = getpass.getpass(prompt='pwd: ')
                                 with open('data', 'a') as y:
                                     y.write('&{}/{}'.format(_user, hashlib.sha256(_pswd.encode()).hexdigest()))
-                                print('set user/pswd to {}/{}'.format(_user, _pswd))
+                                print('added user/pswd {}/{}'.format(_user, _pswd))
                                 _path = _user + '/'
                                 paths = [_user + '/']
                             else:
-                                print('pyos: pysh: permission denied')
+                                print('permission denied')
                         elif x == 'stopwatch':
                             clock.stopwatch()
                         elif x == 'rn':
@@ -271,7 +276,7 @@ try:
                         elif x == 'timer':
                             clock.timer('')
                         elif x == 'python':
-                            print('python3.7.4 (double enter to exec):')
+                            print('python 3.7.4 (double enter to exec):')
                             full = []
                             while True:
                                 line = input()
@@ -285,17 +290,17 @@ try:
                             if _user == 'root':
                                 print(open('data', 'r').read())
                             else:
-                                print('pyos: pysh: permission denied')
+                                print('permission denied')
                         elif x == '#reset':
                             if _user == 'root':
                                 with open('data', 'w') as y:
                                     y.write('root/4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2')
                             else:
-                                print('pyos: pysh: permission denied')
+                                print('permission denied')
                         else:
                             sys.exit()
                     else:
-                        print('pyos: pysh: consecutive cmd {}'.format(x))
+                        print('consecutive cmd {}'.format(x))
                 else:
                     if x.startswith('!'):
                         print(varis[x[1:]])
@@ -309,20 +314,20 @@ try:
                                 if _path + x in paths:
                                     _path = _path + x
                                 else:
-                                    print('pyos: pysh: path \'{}\' not found'.format(x))
+                                    print('path \'{}\' not found'.format(x))
                             else:
-                                print('pyos: pysh: can\'t cd to file \'{}\''.format(x))
+                                print('can\'t cd to file \'{}\''.format(x))
                         waiting = 0
                     elif waiting == 2:
                         if x.endswith('/'):
                             paths.append(_path + x)
                             filedict[x] = []
                         else:
-                            print('pyos: pysh: {} not a valid directory name'.format(x))
+                            print('{} not a valid directory name'.format(x))
                         waiting = 0
                     elif waiting == 3:
                         if x.endswith('/'):
-                            print('pyos: pysh: {} not a valid file name'.format(x))
+                            print('{} not a valid file name'.format(x))
                         else:
                             paths.append(_path + x)
                             filedict[x] = []
@@ -332,7 +337,7 @@ try:
                             for i in filedict[x]:
                                 print(i)
                         except KeyError:
-                            print('pyos: pysh: file {} doesn\'t exist'.format(x))
+                            print('file {} doesn\'t exist'.format(x))
                         waiting = 0
                     elif waiting == 5:
                         filedict[x] = []
@@ -364,7 +369,7 @@ try:
                         if x == '=':
                             waiting = 8
                         else:
-                            print('pyos: pysh: not a valid variable assignment')
+                            print('not a valid variable assignment')
                             waiting = 0
                     elif waiting == 10:
                         try:
@@ -373,7 +378,7 @@ try:
                             filedict[x] = c.read()
                             c.close()
                         except:
-                            print('pyos: pysh: error while importing {}'.format(x))
+                            print('error while importing {}'.format(x))
                         waiting = 0
                     elif waiting == 11:
                         try:
@@ -381,7 +386,7 @@ try:
                             c.write(filedict[x])
                             c.close()
                         except:
-                            print('pyos: pysh: error while exporting {}'.format(x))
+                            print('error while exporting {}'.format(x))
                         waiting = 0
                     elif waiting == 12:
                         try:
@@ -391,7 +396,7 @@ try:
                             filedict[x] = c.read()
                             c.close()
                         except Exception:
-                            print('pyos: pysh: error while getting {}'.format(l))
+                            print('error while getting {}'.format(l))
                         waiting = 0
                     elif waiting == 13:
                         l = x
@@ -401,7 +406,7 @@ try:
                             filedict[x] = filedict[previous]
                             del filedict[previous]
                         else:
-                            print('pyos: pysh: file {} not found'.format(previous))
+                            print('file {} not found'.format(previous))
                     elif waiting == 15:
                         previous = x
                         waiting = 14
@@ -459,8 +464,10 @@ try:
                         except:
                             convert.base('', '', '')
                     else:
-                        print('pyos: pysh: {} not found.'.format(x))
+                        print('{} not found.'.format(x))
                         waiting = 0
     n.close()
 except Exception as err:
-    print(type(err), err)
+    exc_type, exc_obj, exc_tb = sys.exc_info()
+    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+    print(exc_type, fname, exc_tb.tb_lineno)
