@@ -144,7 +144,7 @@ try:
                 n.write('[{:.8f}] login: verified user as {}\n'.format(time.time() - starttime, _user))
                 break
         n.write('[{:.8f}] login: user set to {}\n'.format(time.time() - starttime, _user))
-    print('pyos {} {}-({}.{}.{}) {} @tri-llionaire with @dentafrice, @Akuhcap\nLogin at {}UTC {}\n{}Internet connection\n{}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(_versionpyos, _total, _build, _impbuild, _updbuild, _date, red, str(datetime.datetime.now())[:-3], _internet, yellow, p[30][1:-1], white, blue, p[13], white, magenta, p[34][1:-1], white, cyan, p[46][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
+    print('pyos {} {}-({}.{}.{}) {} @tri-llionaire\nLogin at {}UTC {}\n{}Internet connection\n{}{}F{} and {}{}{} (humidity {}{}%{}, wind speed {}{}mph{})\n{}{}\n{}{}\n{}{}\n{}{}\n{}{}{}'.format(_versionpyos, _total, _build, _impbuild, _updbuild, _date, red, str(datetime.datetime.now())[:-3], _internet, yellow, p[30][1:-1], white, blue, p[13], white, magenta, p[34][1:-1], white, cyan, p[46][1:-1], white, green, v[9][:-68].replace('&#x27;', ''), yellow, v[10][:-68].replace('&#x27;', ''), blue, v[11][:-68].replace('&#x27;', ''), magenta, v[12][:-68].replace('&#x27;', ''), cyan, v[13][:-68].replace('&#x27;', ''), white))
     n.write('[{:.8f}] pysh: loaded prompt\n'.format(time.time() - starttime))
     sys.stdout.write('(pysh 1.4.6) ')
     n.write('[{:.8f}] pysh: ready for input\n'.format(time.time() - starttime))
